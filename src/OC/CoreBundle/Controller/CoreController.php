@@ -17,4 +17,18 @@ class CoreController extends Controller
     {
         return $this->render('OCCoreBundle:Core:index.html.twig');
     }
+
+    // La page des tarifs
+    public function pricelistAction()
+    {
+        return $this->render('OCCoreBundle:Core:pricelist.html.twig');
+    }
+
+    // La page reservation
+    public function reservationAction()
+    {
+        return $this->render('OCCoreBundle:Core:reservation.html.twig');
+    }
+
+
 }

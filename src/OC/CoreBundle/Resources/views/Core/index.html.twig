@@ -5,16 +5,106 @@
 {% endblock %}
 
 {% block body %}
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row centered">
+                <div id="bg-text" class="col-lg-8 col-lg-offset-2">
+                    <h1>Bienvenue sur le site du musée du Louvre</h1>
+                    <h2>Réservez vos billets en ligne</h2>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- headerwrap -->
+    <div class="container w">
+        <div class="row centered">
+            <br><br>
+            <div class="col-lg-4">
+                <i class="fa fa-heart"></i>
+                <h4>DESIGN</h4>
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+            </div><!-- col-lg-4 -->
 
-    <h2>Page d'accueil de notre site</h2>
+            <div class="col-lg-4">
+                <i class="fa fa-laptop"></i>
+                <h4>BOOTSTRAP</h4>
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+            </div><!-- col-lg-4 -->
+
+            <div class="col-lg-4">
+                <i class="fa fa-trophy"></i>
+                <h4>SUPPORT</h4>
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+            </div><!-- col-lg-4 -->
+        </div><!-- row -->
+        <br>
+        <br>
+    </div><!-- container -->
 
 
+    <!-- PORTFOLIO SECTION -->
+    <div id="dg">
+        <div class="container">
+            <div class="row centered">
+                <h4>LATEST WORKS</h4>
+                <br>
+                <div class="col-lg-4">
+                    <div class="tilt">
+                        <a href="#"><img src="{{ asset('bundles/occore/img/p01.png') }}" alt=""></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="tilt">
+                        <a href="#"><img src="{{ asset('bundles/occore/img/p03.png') }}" alt=""></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="tilt">
+                        <a href="#"><img src="{{ asset('bundles/occore/img/p02.png') }}" alt=""></a>
+                    </div>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- DG -->
 
 
-    <p>
-        {# Ici, on devrait utiliser un contrôleur d'un éventuel ForumBundle pour afficher les derniers posts sur le forum,
-           ce n'est pas le sujet ici #}
-        Bla bla bla...
-    </p>
+    
 
-{% endblock %}
+
+    <div id="lg">
+        <div class="container">
+            <div class="row centered">
+                <h4>PAIEMENT SECURISE</h4>
+                <div class="col-lg-2 col-lg-offset-1">
+                    <img src="{{ asset('bundles/occore/img/c01.gif') }}" alt="">
+                </div>
+                <div class="col-lg-2">
+                    <img src="{{ asset('bundles/occore/img/c02.gif') }}" alt="">
+                </div>
+                <div class="col-lg-2">
+                    <img src="{{ asset('bundles/occore/img/c03.gif') }}" alt="">
+                </div>
+                <div class="col-lg-2">
+                    <img src="{{ asset('bundles/occore/img/c04.gif') }}" alt="">
+                </div>
+                <div class="col-lg-2">
+                    <img src="{{ asset('bundles/occore/img/c05.gif') }}" alt="">
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- dg -->
+
+
+    <div id="r">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h4>WE ARE STORYTELLERS. BRANDS ARE OUR SUBJECTS. DESIGN IS OUR VOICE.</h4>
+                    <p>We believe ideas come from everyone, everywhere. At BlackTie, everyone within our agency walls is a designer in their own right. And there are a few principles we believe—and we believe everyone should believe—about our design craft. These truths drive us, motivate us, and ultimately help us redefine the power of design.</p>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><! -- r wrap -->
+
+{% endblock body %}
