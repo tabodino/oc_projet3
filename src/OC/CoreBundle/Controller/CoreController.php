@@ -25,7 +25,10 @@ class CoreController extends Controller
     // La page des tarifs
     public function pricelistAction()
     {
-        return $this->render('OCCoreBundle:Core:pricelist.html.twig');
+        // Récupération du manager d'entité price
+        $prices = $this->get('oc_core_price.manager')->getAll();
+
+        return $this->render('OCCoreBundle:Core:pricelist.html.twig', array('prices' => $prices));
     }
 
     // La page reservation

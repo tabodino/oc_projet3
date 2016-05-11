@@ -35,6 +35,27 @@ class Price
      */
     private $price;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="age_min", type="smallint", nullable=true)
+     */
+    private $ageMin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="age_max", type="smallint", nullable=true)
+     */
+    private $ageMax;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rule", type="string", length=255, nullable=true)
+     */
+    private $rule;
+
 
     /**
      * Get id
@@ -93,5 +114,60 @@ class Price
     {
         return $this->price;
     }
+
+    /**
+     * @return string
+     */
+    public function getAgeMin()
+    {
+        return $this->ageMin;
+    }
+
+    /**
+     * @param string $ageMin
+     */
+    public function setAgeMin($ageMin)
+    {
+        $this->ageMin = $ageMin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAgeMax()
+    {
+        return $this->ageMax;
+    }
+
+    /**
+     * @param string $ageMax
+     */
+    public function setAgeMax($ageMax)
+    {
+        $this->ageMax = $ageMax;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRule()
+    {
+        return $this->rule;
+    }
+
+    /**
+     * @param string $rule
+     */
+    public function setRule($rule)
+    {
+        $this->rule = $rule;
+    }
+
+
+
+
+
+
+
 }
 

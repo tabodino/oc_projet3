@@ -26,141 +26,49 @@
             <div class="row centered">
                 <h4>LISTE DES TARIFS</h4>
                 <br>
-                <div class="col-lg-4">
-                    <!-- START PRICING TABLE -->
-                    <div class="pricing-option">
-                        <div class="pricing-top">
-                            <span class="special-label">GRATUIT</span>
-                            <span class="pricing-edition">PETITS</span>
-                            <span class="price">
+                {% for price in prices %}
+                    <div class="col-lg-4">
+                        <!-- START PRICING TABLE -->
+                        <div class="pricing-option">
+                            <div class="pricing-top">
+                                {% if price.price == 0 %}
+                                    <span class="special-label">GRATUIT</span>
+                                {% endif %}
 
-                                <span class="price-amount">0 </span>
-                                <small>€</small>
-                            </span>
-                        </div>
-                        <ul>
-                            <li><strong>1</strong> Entrée</li>
-                            <li>Jusqu'à <strong>4</strong> ans</li>
+                                <span class="pricing-edition">{{ price.category|upper }}</span>
+                                <span class="price">
+                                    {% if price.price == 0 %}
+                                        <span class="price-amount">0 </span>
+                                    {% else %}
+                                        <span class="price-amount">{{ price.price }} </span>
+                                    {% endif %}
+                                    <small> €</small>
 
-                        </ul>
-                        <a href="{{ path('oc_core_reservation') }}" class="pricing-signup">Réserver</a>
-                    </div><!-- /pricing-option -->
-                    <!-- END PRICING TABLE -->
-                </div><!-- /col -->
+                                </span>
+                            </div>
+                            <ul>
+                                <li><strong>1</strong> Entrée</li>
+                                {% if price.ageMin != null %}
+                                   <li>A partir de <strong>{{ price.ageMin }}</strong> ans</li>
+                                {% elseif price.ageMax != null %}
+                                    <li>Jusqu'à <strong>{{ price.ageMax }}</strong> ans</li>
+                                {% else %}
+                                    <li>{{ price.rule }}</li>
+                                {%  endif %}
 
-                <div class="col-lg-4">
-                    <!-- START PRICING TABLE -->
-                    <div class="pricing-option">
-                        <div class="pricing-top">
-                            <span class="pricing-edition">ENFANT</span>
-                            <span class="price">
 
-                                <span class="price-amount">8 </span>
-                                <small>€</small>
-                            </span>
-                        </div>
-                        <ul>
-                            <li><strong>1</strong> Entrée</li>
-                            <li>Jusqu'à <strong>12</strong> ans</li>
+                            </ul>
+                            <a href="{{ path('oc_core_reservation') }}" class="pricing-signup">Réserver</a>
+                        </div><!-- /pricing-option -->
+                        <!-- END PRICING TABLE -->
+                    </div><!-- /col -->
+                {% endfor %}
 
-                        </ul>
-                        <a href="{{ path('oc_core_reservation') }}" class="pricing-signup">Réserver</a>
-                    </div><!-- /pricing-option -->
-                    <!-- END PRICING TABLE -->
-                </div><!-- /col -->
 
-                <div class="col-lg-4">
-                    <!-- START PRICING TABLE -->
-                    <div class="pricing-option">
-                        <div class="pricing-top">
-                            <span class="pricing-edition">NORMAL</span>
-                            <span class="price">
-
-                                <span class="price-amount">16 </span>
-                                <small>€</small>
-                            </span>
-                        </div>
-                        <ul>
-                            <li><strong>1</strong> Entrée</li>
-                            <li>A partir de <strong>12</strong> ans</li>
-
-                        </ul>
-                        <a href="{{ path('oc_core_reservation') }}" class="pricing-signup">Réserver</a>
-                    </div><!-- /pricing-option -->
-                    <!-- END PRICING TABLE -->
-                </div><!-- /col -->
             </div><!-- row -->
         </div><!-- container -->
     </div><!-- DG -->
 
-    <!-- PRICING SECTION -->
-    <div id="dg">
-        <div class="container">
-            <div class="row centered">
-
-                <div class="col-lg-4">
-                    <!-- START PRICING TABLE -->
-                    <div class="pricing-option">
-                        <div class="pricing-top">
-                            <span class="pricing-edition">REDUIT</span>
-                            <span class="price">
-                                <span class="price-amount">10 </span>
-                                <small>€</small>
-                            </span>
-                        </div>
-                        <ul>
-                            <li><strong>1</strong> Entrée</li>
-                            <li>Sous conditions *</li>
-
-                        </ul>
-                        <a href="{{ path('oc_core_reservation') }}" class="pricing-signup">Réserver</a>
-                    </div><!-- /pricing-option -->
-                    <!-- END PRICING TABLE -->
-                </div><!-- /col -->
-
-                <div class="col-lg-4">
-                    <!-- START PRICING TABLE -->
-                    <div class="pricing-option">
-                        <div class="pricing-top">
-                            <span class="pricing-edition">SENIOR</span>
-                            <span class="price">
-                                <span class="price-amount">12 </span>
-                                <small>€</small>
-                            </span>
-                        </div>
-                        <ul>
-                            <li><strong>1</strong> Entrée</li>
-                            <li>A partir de <strong>60</strong> ans</li>
-
-                        </ul>
-                        <a href="{{ path('oc_core_reservation') }}" class="pricing-signup">Réserver</a>
-                    </div><!-- /pricing-option -->
-                    <!-- END PRICING TABLE -->
-                </div><!-- /col -->
-
-                <div class="col-lg-4">
-                    <!-- START PRICING TABLE -->
-                    <div class="pricing-option">
-                        <div class="pricing-top">
-                            <span class="pricing-edition">FAMILLE</span>
-                            <span class="price">
-
-                                <span class="price-amount">35 </span>
-                                <small>€</small>
-                            </span>
-                        </div>
-                        <ul>
-                            <li><strong>2</strong> Adultes et <strong>2</strong> enfants</li>
-                            <li>Même nom de famille requis</li>
-
-                        </ul>
-                        <a href="{{ path('oc_core_reservation') }}" class="pricing-signup">Réserver</a>
-                    </div><!-- /pricing-option -->
-                    <!-- END PRICING TABLE -->
-                </div><!-- /col -->
-            </div><!-- row -->
-        </div><!-- container -->
-    </div><!-- DG -->
 
     <div id="r">
         <div class="container">
@@ -168,7 +76,7 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <h4> * Conditions requises pour bénéficier du tarif réduit</h4>
                     <p>Un tarif réduit de 10 € est accordé pour les étudiants, les employés du musée, les employés d’un service du Ministère de la Culture et les militaires.
-                    <br>Un justificatif vous sera demandé aux caisses du musée.</p>
+                        <br>Un justificatif vous sera demandé aux caisses du musée.</p>
                 </div>
             </div><!-- row -->
         </div><!-- container -->

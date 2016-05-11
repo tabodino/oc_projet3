@@ -9,3 +9,6 @@ oc_core_pricelist:
 oc_core_reservation:
     path:     /reservation
     defaults: { _controller: OCCoreBundle:Core:reservation }
+
+adesigns_calendar:
+    resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"

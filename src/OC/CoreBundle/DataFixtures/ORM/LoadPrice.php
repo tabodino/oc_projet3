@@ -21,20 +21,23 @@ class LoadPrice implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $prices = array(
-            'petit' => 0,
-            'enfant' => 8,
-            'normal' => 16,
-            'réduit' => 10,
-            'sénior' => 12,
-            'famille' => 35,
-        );
 
-        foreach ($prices as $key => $value) {
+        $prices = array();
+        // param array(category, price, ageMin, ageMax, condition)
+        $prices[0] = array('petit', 0, null, 4, null);
+        $prices[1] = array('enfant', 8, null, 12, null);
+        $prices[2] = array('normal', 16, 12, null, null);
+        $prices[3] = array('réduit', 10, null, null, "Sous condition *");
+        $prices[4] = array('senior', 12, 60, null, null);
+        $prices[5] = array('famille', 35, null, null, "Même nom de famille requis");
 
+        foreach ($prices as $pr) {
             $price = new Price();
-            $price->setCategory($key);
-            $price->setPrice($value);
+            $price->setCategory($pr[0]);
+            $price->setPrice($pr[1]);
+            $price->setAgeMin($pr[2]);
+            $price->setAgeMax($pr[3]);
+            $price->setRule($pr[4]);
 
             $manager->persist($price);
         }

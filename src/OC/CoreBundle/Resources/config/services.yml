@@ -1,4 +1,4 @@
 services:
-#    oc_core.example:
-#        class: OC\CoreBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    oc_core_price.manager:
+        class: OC\CoreBundle\EntityManager\PriceManager
+        arguments: ["@doctrine.orm.default_entity_manager"]
