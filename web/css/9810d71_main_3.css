@@ -411,4 +411,8 @@ a:after {
     background: #ff7878;
 }
 
+.text-justify {
+    text-align: justify;
+}
+
 

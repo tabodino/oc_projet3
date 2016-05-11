@@ -18,23 +18,26 @@
     <div class="container w">
         <div class="row centered">
             <br><br>
+
             <div class="col-lg-4">
-                <i class="fa fa-heart"></i>
-                <h4>DESIGN</h4>
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+                <i class="fa fa-clock-o"></i>
+                <h4>HORAIRES</h4>
+                <p class="text-justify">Ouvert de 9h à 18h, et jusqu’à 21h45 les mercredis et vendredis. Fermé les mardis et les 1er janvier, 1er mai et 25 décembre. Un justificatif peut vous être demandé si vous bénéficiez d'une réduction.</p>
+            </div><!-- col-lg-4 -->
+
+
+            <div class="col-lg-4">
+                <i class="fa fa-ticket"></i>
+                <h4>RESERVATIONS</h4>
+                <p class="text-justify">Le billet acheté en ligne est horodaté et nominatif, un document d’identité peut être demandé. Il est valable exclusivement pour la prestation, la date et à compter de l'heure mentionnée.</p>
             </div><!-- col-lg-4 -->
 
             <div class="col-lg-4">
-                <i class="fa fa-laptop"></i>
-                <h4>BOOTSTRAP</h4>
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
+                <i class="fa fa-volume-up"></i>
+                <h4>AUDIOGUIDE</h4>
+                <p class="text-justify">Disponible en français, anglais, japonais, italien, allemand, coréen et espagnol. Retrait contre le dépôt d’un document d’identité aux comptoirs de distribution, jusqu’à 16h, 20h en nocturne.</p>
             </div><!-- col-lg-4 -->
 
-            <div class="col-lg-4">
-                <i class="fa fa-trophy"></i>
-                <h4>SUPPORT</h4>
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even believable.</p>
-            </div><!-- col-lg-4 -->
         </div><!-- row -->
         <br>
         <br>
@@ -45,23 +48,26 @@
     <div id="dg">
         <div class="container">
             <div class="row centered">
-                <h4>LATEST WORKS</h4>
-                <br>
+
+
                 <div class="col-lg-4">
+                    <h4>TARIFS</h4>
                     <div class="tilt">
-                        <a href="#"><img src="{{ asset('bundles/occore/img/p01.png') }}" alt=""></a>
+                        <a href="{{ path('oc_core_pricelist') }}"><img src="{{ asset('bundles/occore/img/p05.png') }}" alt="tarifs"></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
+                    <h4>RESERVATIONS</h4>
                     <div class="tilt">
-                        <a href="#"><img src="{{ asset('bundles/occore/img/p03.png') }}" alt=""></a>
+                        <a href="{{ path('oc_core_reservation') }}"><img src="{{ asset('bundles/occore/img/p01.png') }}" alt="reservations"></a>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
+                    <h4>CONTACT</h4>
                     <div class="tilt">
-                        <a href="#"><img src="{{ asset('bundles/occore/img/p02.png') }}" alt=""></a>
+                       <a data-toggle="modal" data-target="#myModal" href="#myModal"><img src="{{ asset('bundles/occore/img/p06.png') }}" alt="contact"></a>
                     </div>
                 </div>
             </div><!-- row -->
@@ -72,22 +78,20 @@
     <div id="lg">
         <div class="container">
             <div class="row centered">
-                <h4>PAIEMENT SECURISE</h4>
-                <div class="col-lg-2 col-lg-offset-1">
-                    <img src="{{ asset('bundles/occore/img/c01.gif') }}" alt="">
+                <h4>PAIEMENT 100 % SECURISE</h4>
+                <div class="col-lg-3">
+                    <img src="{{ asset('bundles/occore/img/paypal.png') }}" alt="paypal">
                 </div>
-                <div class="col-lg-2">
-                    <img src="{{ asset('bundles/occore/img/c02.gif') }}" alt="">
+                <div class="col-lg-3">
+                    <img src="{{ asset('bundles/occore/img/cb.png') }}" alt="carte bleue">
                 </div>
-                <div class="col-lg-2">
-                    <img src="{{ asset('bundles/occore/img/c03.gif') }}" alt="">
+                <div class="col-lg-3">
+                    <img src="{{ asset('bundles/occore/img/mastercard.png') }}" alt="mastercard">
                 </div>
-                <div class="col-lg-2">
-                    <img src="{{ asset('bundles/occore/img/c04.gif') }}" alt="">
+                <div class="col-lg-3">
+                    <img src="{{ asset('bundles/occore/img/visa.png') }}" alt="visa">
                 </div>
-                <div class="col-lg-2">
-                    <img src="{{ asset('bundles/occore/img/c05.gif') }}" alt="">
-                </div>
+
             </div><!-- row -->
         </div><!-- container -->
     </div><!-- dg -->
@@ -97,8 +101,12 @@
         <div class="container">
             <div class="row centered">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <h4>WE ARE STORYTELLERS. BRANDS ARE OUR SUBJECTS. DESIGN IS OUR VOICE.</h4>
-                    <p>We believe ideas come from everyone, everywhere. At BlackTie, everyone within our agency walls is a designer in their own right. And there are a few principles we believe—and we believe everyone should believe—about our design craft. These truths drive us, motivate us, and ultimately help us redefine the power of design.</p>
+                    <h4>COMMENT VENIR AU MUSEE DU LOUVRE ?</h4>
+                    <p><strong>En Batobus : </strong>Escale Louvre, quai François Mitterrand<br>
+                        <strong>En voiture : </strong>un parc de stationnement souterrain est accessible par l'avenue du général Lemonier.<br>
+
+                        <strong>Depuis l'Aéroport d'Orly : </strong>RER C direction Champs de Mars-Tour Eiffel, descendre à St-Michel Notre-Dame, marcher jusqu'à Saint Michel, prendre le bus 27 direction Saint Lazare, descendre à Musée du Louvre.<br>
+                        <strong>Depuis l'Aéroport Charles de Gaulle : </strong>RER B direction Massy-Palaiseau, changer à Chatelet les Halles, prendre la ligne 14 direction Saint-Lazare, descendre à Pyramides et marcher jusqu'au musée du Louvre ou bien prendre la ligne 1 et descendre à Palais-Royal / Musée du Louvre.</p>
                 </div>
             </div><!-- row -->
         </div><!-- container -->
