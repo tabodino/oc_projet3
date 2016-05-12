@@ -36,8 +36,17 @@
 
 
     <div class="form-group">
-        {{ form_label(form.birthday, "Votre date de naissance", {'label_attr': {'class': 'control-label'}}) }}
-        {{ form_widget(form.birthday) }}
+        <div class="row">
+            <div class="col-lg-6">
+                {{ form_label(form.birthday, "Votre date de naissance", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.birthday) }}
+            </div>
+            <div class="col-lg-6">
+                <br>
+                {{ form_widget(form.ticket.reduced) }}
+
+            </div>
+        </div>
     </div>
     <br>
     <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-plus"></i> Ajouter au panier</button>
@@ -47,4 +56,3 @@
 
 
 {{ form_end(form) }}
-

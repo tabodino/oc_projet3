@@ -43,6 +43,13 @@ class Ticket
     private $fullDay;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="reduced", type="boolean")
+     */
+    private $reduced = false;
+
+    /**
      *
      * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Price")
      */
@@ -141,6 +148,16 @@ class Ticket
     {
         return $this->fullDay;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isReduced()
+    {
+        return $this->reduced;
+    }
+
+
 
     /**
      * @return mixed

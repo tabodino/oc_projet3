@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,8 +29,10 @@ class TicketType extends AbstractType
                     'demi-journée' => 0,
                     'journée entière' => 1,
                 ),
-
-
+            ))
+            ->add('reduced', CheckboxType::class, array(
+                'label' => "Je dispose d'une réduction *",
+                'required' => false,
             ))
         ;
     }
