@@ -59,7 +59,7 @@ class CoreController extends Controller
         $countries = array();
 
         // Verifie si la requete est en Ajax
-        //if ($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
 
             $tabcountries = $this
                 ->getDoctrine()
@@ -67,11 +67,13 @@ class CoreController extends Controller
                 ->getRepository('OCCoreBundle:Country')
                 ->getCountryBeginWith($country);
 
+            // création d'un tableau 1 dimension pour les pays
             foreach ($tabcountries as $c) {
-                array_push($c, $countries);
+                foreach ($c as $key=>$value) {
+                    array_push($countries, $value);
+                }
             }
-        var_dump($tabcountries); die();
-      //  }
+        }
 
         return $this->render('OCCoreBundle:Core:completeCountry.html.twig', array('countries' => $countries));
     }

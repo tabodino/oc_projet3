@@ -1,6 +1,16 @@
 
  {% for country in countries %}
 
-        <option value="{{ country }}"> {{ country }}</option>
+        <li id="{{ country }}"> {{ country }}</li>
 
  {% endfor %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="application/javascript">
+        $('#listcom li').on('click', function(){
+            $('#listcom').hide();
+            $('#visitor_country').val($(this).attr('id')).show();
+        });
+    </script>
+{% endblock %}
