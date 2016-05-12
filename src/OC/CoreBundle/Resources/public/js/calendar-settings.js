@@ -18,6 +18,7 @@ $(function () {
             // for all other views
             '': 'h:mmt'         // 7p
         },
+        lang: 'fr',
         eventSources: [
             {
                 url: Routing.generate('fullcalendar_loader'),

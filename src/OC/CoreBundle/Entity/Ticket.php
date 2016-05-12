@@ -42,6 +42,23 @@ class Ticket
      */
     private $fullDay;
 
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Price")
+     */
+    private $price;
+
+
+    public function __construct()
+    {
+        $this->codeReservation = $this->generateCodeReservation(15);
+    }
+
+    // Méthode pour générer chaine alphanumérique aléatoire
+    private function generateCodeReservation($length)
+    {
+        return substr(sha1(rand()), 0, $length);
+    }
 
     /**
      * Get id
@@ -124,5 +141,23 @@ class Ticket
     {
         return $this->fullDay;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+
 }
 

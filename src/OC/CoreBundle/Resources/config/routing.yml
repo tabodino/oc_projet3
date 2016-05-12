@@ -10,5 +10,6 @@ oc_core_reservation:
     path:     /reservation
     defaults: { _controller: OCCoreBundle:Core:reservation }
 
-adesigns_calendar:
-    resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"
+oc_core_test:
+    path:     /test/{word}
+    defaults: { _controller: OCCoreBundle:Core:completeCountry }

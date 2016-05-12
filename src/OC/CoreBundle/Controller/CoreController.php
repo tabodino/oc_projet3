@@ -9,10 +9,14 @@
 namespace OC\CoreBundle\Controller;
 
 use OC\CoreBundle\Entity\Customer;
-use OC\CoreBundle\Form\Type\CustomerType;
-use OC\CoreBundle\Form\Handler\CustomerFormHandler;
+use OC\CoreBundle\Entity\Ticket;
+use OC\CoreBundle\Entity\Visitor;
+use OC\CoreBundle\Form\Handler\VisitorFormHandler;
+use OC\CoreBundle\Form\Type\TicketType;
+use OC\CoreBundle\Form\Type\VisitorType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CoreController extends Controller
 {
@@ -34,25 +38,43 @@ class CoreController extends Controller
     // La page reservation
     public function reservationAction(Request $request)
     {
-        //Nouvel objet client
-        $customer = new Customer();
+        //Nouvel objet visiteur
+        $visitor = new Visitor();
         // Création formulaire
-        $form = $this->get('form.factory')->create(CustomerType::class, $customer);
+        $form = $this->get('form.factory')->create(VisitorType::class, $visitor);
         // Instance du form handler client
-        $formHandler = new CustomerFormHandler($form, $request, $this->getDoctrine()->getManager(), $customer);
-
-        if ($formHandler->process()) {
-
-            return $this->redirectToRoute('oc_core_homepage');
-            //return new RedirectResponse($this->generateUrl("dashboard"));
-        }
-
-        return $this->render('OCCoreBundle:Core:reservation.html.twig', array(
-            'form' => $form->createView()
-        ));
+        $formHandler = new VisitorFormHandler($form, $request, $this->getDoctrine()->getManager(), $visitor);
+        // Procédure si formulaire validé
+        if ($formHandler->process()) return $this->redirectToRoute('oc_core_homepage');
+        // Return template reservation
+        return $this->render('OCCoreBundle:Core:reservation.html.twig', array('form' => $form->createView()));
     }
 
+    // Requete ajax autocompletion pays
+    public function completeCountryAction(Request $request, $word)
+    {
+        // récuperation du pays en paramètre
+        $country = $request->get('word');
+        // Tableau pour stocker les suggestions
+        $countries = array();
 
+        // Verifie si la requete est en Ajax
+        //if ($request->isXmlHttpRequest()) {
+
+            $tabcountries = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('OCCoreBundle:Country')
+                ->getCountryBeginWith($country);
+
+            foreach ($tabcountries as $c) {
+                array_push($c, $countries);
+            }
+        var_dump($tabcountries); die();
+      //  }
+
+        return $this->render('OCCoreBundle:Core:completeCountry.html.twig', array('countries' => $countries));
+    }
 
 
 }
