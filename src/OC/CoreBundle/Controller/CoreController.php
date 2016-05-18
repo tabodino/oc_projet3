@@ -9,12 +9,15 @@
 namespace OC\CoreBundle\Controller;
 
 use OC\CoreBundle\Entity\Customer;
+use OC\CoreBundle\Entity\Price;
 use OC\CoreBundle\Entity\Ticket;
 use OC\CoreBundle\Entity\Visitor;
 use OC\CoreBundle\Form\Handler\VisitorFormHandler;
 use OC\CoreBundle\Form\Type\TicketType;
 use OC\CoreBundle\Form\Type\VisitorType;
+use OC\CoreBundle\Services\AgeCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Finder\Comparator\DateComparator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -45,7 +48,7 @@ class CoreController extends Controller
         // Instance du form handler client
         $formHandler = new VisitorFormHandler($form, $request, $this->getDoctrine()->getManager(), $visitor);
         // Procédure si formulaire validé
-        if ($formHandler->process()) return $this->redirectToRoute('oc_core_homepage');
+        if ($formHandler->process()) return $this->redirectToRoute('oc_core_cart_add', array('id' => $visitor->getId()));
         // Return template reservation
         return $this->render('OCCoreBundle:Core:reservation.html.twig', array('form' => $form->createView()));
     }
@@ -55,25 +58,10 @@ class CoreController extends Controller
     {
         // récuperation du pays en paramètre
         $country = $request->get('word');
-        // Tableau pour stocker les suggestions
+        // Tableau vide en cas d'erreur ajax
         $countries = array();
-
         // Verifie si la requete est en Ajax
-        if ($request->isXmlHttpRequest()) {
-
-            $tabcountries = $this
-                ->getDoctrine()
-                ->getManager()
-                ->getRepository('OCCoreBundle:Country')
-                ->getCountryBeginWith($country);
-
-            // création d'un tableau 1 dimension pour les pays
-            foreach ($tabcountries as $c) {
-                foreach ($c as $key=>$value) {
-                    array_push($countries, $value);
-                }
-            }
-        }
+        if ($request->isXmlHttpRequest()) $countries = $this->get('oc_core_country.manager')->getCountryBeginWith($word);
 
         return $this->render('OCCoreBundle:Core:completeCountry.html.twig', array('countries' => $countries));
     }

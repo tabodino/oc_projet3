@@ -28,6 +28,7 @@ class PriceManager
             ->findAll()
         ;
     }
+    
 
 
 

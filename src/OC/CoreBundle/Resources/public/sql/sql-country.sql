@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `country` (
 -- Dumping data for table `country`
 --
 
-INSERT INTO `pays` (`id`, `code`, `alpha2`, `alpha3`, `name_en_gb`, `name_fr_fr`) VALUES
+INSERT INTO `country` (`id`, `code`, `alpha2`, `alpha3`, `name_en_gb`, `name_fr_fr`) VALUES
 (1, 4, 'AF', 'AFG', 'Afghanistan', 'Afghanistan'),
 (2, 8, 'AL', 'ALB', 'Albania', 'Albanie'),
 (3, 10, 'AQ', 'ATA', 'Antarctica', 'Antarctique'),

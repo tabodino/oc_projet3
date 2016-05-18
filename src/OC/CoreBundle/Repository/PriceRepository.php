@@ -11,5 +11,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class PriceRepository extends EntityRepository
 {
+    public function getPriceByAge($age)
+    {
 
+        $qb = $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.ageMin <= :age')
+            ->andWhere('p.ageMax > :age OR p.ageMax IS NULL')
+            ->setParameter('age', $age)
+        ;
+
+        return $qb->getQuery()->getSingleResult();
+    }
+
+    public function getReducedPrice($reducedName)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.category = :reduced')
+            ->setParameter('reduced', $reducedName)
+        ;
+
+        return $qb->getQuery()->getSingleResult();
+    }
 }

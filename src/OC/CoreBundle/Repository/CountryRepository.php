@@ -20,13 +20,10 @@ class CountryRepository extends EntityRepository
             ->select('c.nameFrFr')
             ->where('c.nameFrFr LIKE :word')
             ->setParameter('word', $word.'%')
-            ->setMaxResults(10)
+            ->setMaxResults(8)
         ;
 
-        return $qb
-            ->getQuery()
-            ->getResult()
-        ;
+        return $qb->getQuery()->getResult();
 
     }
 }

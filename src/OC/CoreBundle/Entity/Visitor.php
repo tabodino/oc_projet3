@@ -3,6 +3,7 @@
 namespace OC\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Visitor
@@ -25,36 +26,51 @@ class Visitor
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=150)
+     * @Assert\Length(min=2)
+     * @Assert\NotBlank()
      */
-    private $firstname;
+    protected $firstname;
 
     /**
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=150)
+     * @Assert\Length(min=2)
+     * @Assert\NotBlank()
      */
-    private $lastname;
+    protected $lastname;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday", type="datetime")
+     * @ORM\Column(name="birthday", type="date")
+     * @Assert\Date()
      */
-    private $birthday;
+    protected $birthday;
 
     /**
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $country;
+    protected $country;
 
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Ticket", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Ticket", cascade={"persist", "remove"})
      */
-    private $ticket;
+    protected $ticket;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="OC\CoreBundle\Entity\Price", inversedBy="price_id")
+     */
+    protected $price;
+
 
     /**
      * Get id
@@ -177,6 +193,23 @@ class Visitor
     {
         $this->ticket = $ticket;
     }
+
+    /**
+     * @return string
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param string $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
 
 
 }

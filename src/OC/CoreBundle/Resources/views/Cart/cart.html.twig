@@ -1,0 +1,69 @@
+{% extends "OCCoreBundle::layout.html.twig" %}
+
+{# Variable pour le total de la commande #}
+{% set total = 0 %}
+
+{% block title %}
+    Votre panier - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="blue">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h4>DETAIL DE VOTRE PANIER</h4>
+                    <p>VOUS AVEZ {{ reservations|length }}
+                        {{ reservations|length > 1 ? 'RESERVATIONS' : 'RESERVATION' }}.</p>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!--  bluewrap -->
+    <div class="container">
+        <div class="row">
+            <h3 class="text-center">Récapitulatif de votre commande</h3><br>
+
+                {% for reservation in reservations %}
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Réservation n° {{ reservation.ticket.codeReservation }}<span class="pull-right">{{ reservation.price.price}} €</span></h4>
+                        </div>
+                        <div class="panel-body">
+                            <p><i class="fa fa-user"></i> Réservation au nom de : {{ reservation.firstname|capitalize }} {{ reservation.lastname|capitalize }}</p>
+                            <p><i class="fa fa-money"></i> Tarif : {{ reservation.price.category}}</p>
+                            <p><i class="fa fa-ticket"></i> Billet valable le : {{ reservation.ticket.dateReservation|date('d/m/Y') }}
+                                {%  if reservation.ticket.fullDay == 0 %}
+                                    à partir de 14h00
+                                {% else %}
+                                    toute la journée
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="panel-footer">
+                            <a href="{{ path('oc_core_cart_remove', { 'id': reservation.id }) }}" class="btn btn-danger "><i class="fa fa-trash-o"></i> Supprimer cette réservation</a>
+                        </div>
+
+                    </div>
+                    {% set total = total + reservation.price.price %}
+                {% endfor %}
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                       <h4 class="panel-title"><strong>Montant total de votre commande : <span class="pull-right">{{ total|number_format(2) }} €</span> </strong></h4>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row centered">
+            <div class="col-lg-12">
+                <div class="col-lg-6"><a href="{{ path('oc_core_reservation') }}" class="btn btn-bg btn-default">Ajouter une réservation</a></div>
+                <div class="col-lg-6"><a href="{{ path('oc_core_cart_validate') }}" class="btn btn-bg btn-primary">Finaliser ma commande</a></div>
+            </div>
+
+        </div>
+        <br><br><br>
+    </div>
+{% endblock %}

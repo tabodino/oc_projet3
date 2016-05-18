@@ -4,6 +4,7 @@ namespace OC\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,9 +20,8 @@ class VisitorType extends AbstractType
         $builder
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('birthday', DateTimeType::class, array(
+            ->add('birthday', DateType::class, array(
                 'widget' => 'single_text',
-                'format' => 'yyyy-mm-dd',
             ))
             ->add('country', TextType::class)
             ->add('ticket', TicketType::class)

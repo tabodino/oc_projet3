@@ -1,0 +1,44 @@
+{% extends "OCCoreBundle::layout.html.twig" %}
+
+{% block title %}
+    Valider votre panier - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="blue">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h4>VALIDATION DE VOTRE PANIER</h4>
+                    <p>VOUS AVEZ {{ reservations|length }}
+                        {{ reservations|length > 1 ? 'RESERVATIONS' : 'RESERVATION' }}.</p>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!--  bluewrap -->
+    <div class="container">
+        <div class="row">
+            <h4>Détail de votre commande</h4><br>
+            <ul>
+                {% for reservation in reservations %}
+                    <li>Réservation n° {{ reservation.codeReservation }}</li>
+                    <li>{{ reservation.id }}</li>
+                    <li>{{ reservation.firstname }}</li>
+                    <li>{{ reservation.lastname }}</li>
+                    <li>{{ reservation.ticket.fullDay }}</li>
+                    <li>{{ reservation.ticket.dateReservation|date('d/m/Y') }}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        <div class="row centered">
+            <div class="col-lg-12">
+                <h4>Moyen de paiement de vote commande</h4>
+                <div class="col-lg-6"><a href="{{ path('oc_core_reservation') }}" class="btn btn-bg btn-default">PayPal</a></div>
+                <div class="col-lg-6"><a href="{{ path('oc_core_cart_validate') }}" class="btn btn-bg btn-primary">Stripe</a></div>
+            </div>
+
+        </div>
+        <br><br><br>
+    </div>
+{% endblock %}

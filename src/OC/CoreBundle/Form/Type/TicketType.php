@@ -4,8 +4,7 @@ namespace OC\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,11 +19,12 @@ class TicketType extends AbstractType
     {
         $builder
            // ->add('codeReservation')
-            ->add('dateReservation', DateTimeType::class, array(
+            ->add('dateReservation', DateType::class, array(
                'widget' => 'single_text',
-               'format' => 'yyyy-mm-dd',
+               'format' => 'yyyy-MM-dd',
              ))
             ->add('fullDay', ChoiceType::class, array(
+                'placeholder' => '',
                 'choices' => array(
                     'demi-journée' => 0,
                     'journée entière' => 1,

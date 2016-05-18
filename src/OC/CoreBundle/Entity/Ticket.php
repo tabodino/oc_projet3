@@ -3,12 +3,18 @@
 namespace OC\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use OC\CoreBundle\Validator\AntiPastDateReservation;
+use OC\CoreBundle\Validator\AntiPastDateReservationValidator;
+
 
 /**
  * Ticket
  *
  * @ORM\Table(name="ticket")
  * @ORM\Entity(repositoryClass="OC\CoreBundle\Repository\TicketRepository")
+ * @Assert\Callback(methods={"getDateReservationValid"})
  */
 class Ticket
 {
@@ -29,16 +35,17 @@ class Ticket
     private $codeReservation;
 
     /**
-     * @var \DateTime
      *
-     * @ORM\Column(name="date_reservation", type="datetime")
+     * @ORM\Column(name="date_reservation", type="date")
+     * @AntiPastDateReservation(message="Marche pas!")
+     * @Assert\Date()
      */
     private $dateReservation;
 
     /**
      * @var bool
-     *
      * @ORM\Column(name="full_day", type="boolean")
+     * @Assert\NotBlank()
      */
     private $fullDay;
 
@@ -47,13 +54,8 @@ class Ticket
      *
      * @ORM\Column(name="reduced", type="boolean")
      */
-    private $reduced = false;
+    private $reduced;
 
-    /**
-     *
-     * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Price")
-     */
-    private $price;
 
 
     public function __construct()
@@ -158,21 +160,38 @@ class Ticket
     }
 
 
-
     /**
-     * @return mixed
+     * @param mixed $reduced
      */
-    public function getPrice()
+    public function setReduced($reduced)
     {
-        return $this->price;
+        $this->reduced = $reduced;
     }
 
+
+
     /**
-     * @param mixed $price
+     * @Assert\Callback
      */
-    public function setPrice($price)
+    public function getDateReservationValid(ExecutionContextInterface $context)
     {
-        $this->price = $price;
+            $today = new \DateTime('now');
+            $today->format('Y-m-d');
+
+            $dateReservation = $this->getDateReservation();
+            $dateReservation->format('Y-m-d');
+
+            if( $today == $dateReservation OR 1 == 1) {
+
+                $context
+                    ->buildViolation('Date invalide égale today')
+                    ->atPath('dateReservation')
+                    ->addViolation()
+                ;
+            }
+
+
+
     }
 
 

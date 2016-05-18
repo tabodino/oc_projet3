@@ -51,6 +51,9 @@
                 <li><a href="{{ path('oc_core_pricelist') }}">Tarifs</a></li>
                 <li><a href="{{ path('oc_core_reservation') }}">Réservations</a></li>
                 <li><a data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-envelope-o"></i> Contact</a></li>
+                {% if app.session.get(('cart')) != null %}
+                <li><a href="{{ path('oc_core_cart_view') }}"><i class="fa fa-shopping-cart"></i> Votre panier <span class="badge">{{ app.session.get('cart')|length }}</span></a></li>
+                {% endif %}
             </ul>
         </div><!--/.nav-collapse -->
     </div>

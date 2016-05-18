@@ -13,8 +13,14 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap requires jQuery");+func
 
 // Fonction datapicker
 $(function() {
-    $( "#visitor_birthday" ).datepicker();
-    $( "#visitor_ticket_dateReservation" ).datepicker();
+    $( "#visitor_birthday" ).datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+    $( "#visitor_ticket_dateReservation" ).datepicker({
+        dateFormat: "yy-mm-dd",
+        //minDate: 0
+        gotoCurrent: true
+    });
 });
 
 // Récupération et affichage du pays cliqué

@@ -2,3 +2,18 @@ services:
     oc_core_price.manager:
         class: OC\CoreBundle\EntityManager\PriceManager
         arguments: ["@doctrine.orm.default_entity_manager"]
+
+    oc_core_country.manager:
+        class: OC\CoreBundle\EntityManager\CountryManager
+        arguments: ["@doctrine.orm.default_entity_manager"]
+
+    oc_core_visitor.manager:
+        class: OC\CoreBundle\EntityManager\VisitorManager
+        arguments: ["@doctrine.orm.default_entity_manager"]
+
+
+
+    # Récupère le panier en session
+    oc_core_cart.session:
+        class: OC\CoreBundle\Services\CartSession
+        arguments: ["@request_stack"]
