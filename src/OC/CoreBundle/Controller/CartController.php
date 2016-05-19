@@ -8,8 +8,11 @@
 
 namespace OC\CoreBundle\Controller;
 
+use OC\CoreBundle\Entity\Customer;
 use OC\CoreBundle\EntityManager\VisitorManager;
+use OC\CoreBundle\Form\Handler\CustomerFormHandler;
 use OC\CoreBundle\Form\Handler\VisitorFormHandler;
+use OC\CoreBundle\Form\Type\CustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -82,10 +85,23 @@ class CartController extends Controller
     // Validation panier
     public function validateCartAction(Request $request)
     {
-        // Service session panier
-        $cart = $this->get('oc_core_cart.session')->cartSession();
+        $customer = new Customer();
+        // Instance du form handler client
+        $formHandler = new CustomerFormHandler($request, $this->getDoctrine()->getManager(), $customer);
+        // Procédure si formulaire validé
+        if ($formHandler->process()) {
+            $em = $this->getDoctrine()->getManager();
+            $visitors = $em->getRepository('OCCoreBundle:Visitor')->getVisitorByCustomerId($customer->getId());
+            // Qr code + envoi mail + pdf
 
-        return $this->render('OCCoreBundle:Cart:validateCart.html.twig');
+        }
+
+
+
+
+        // Vider la session + envoi email + generation qrcode
+
+        return $this->render('OCCoreBundle:Cart:validatedCart.html.twig');
     }
 
 }

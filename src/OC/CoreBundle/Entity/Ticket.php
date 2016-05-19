@@ -4,9 +4,7 @@ namespace OC\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use OC\CoreBundle\Validator\AntiPastDateReservation;
-use OC\CoreBundle\Validator\AntiPastDateReservationValidator;
+use Symfony\Component\Validator\Constraints\RangeValidator;
 
 
 /**
@@ -14,7 +12,6 @@ use OC\CoreBundle\Validator\AntiPastDateReservationValidator;
  *
  * @ORM\Table(name="ticket")
  * @ORM\Entity(repositoryClass="OC\CoreBundle\Repository\TicketRepository")
- * @Assert\Callback(methods={"getDateReservationValid"})
  */
 class Ticket
 {
@@ -35,12 +32,17 @@ class Ticket
     private $codeReservation;
 
     /**
+     * @var \DateTime
      *
      * @ORM\Column(name="date_reservation", type="date")
-     * @AntiPastDateReservation(message="Marche pas!")
      * @Assert\Date()
+     * @Assert\Range(
+     *     min = "1910-01-01",
+     *     max = "now",
+     *
+     * )
      */
-    private $dateReservation;
+    protected $dateReservation;
 
     /**
      * @var bool
@@ -166,32 +168,6 @@ class Ticket
     public function setReduced($reduced)
     {
         $this->reduced = $reduced;
-    }
-
-
-
-    /**
-     * @Assert\Callback
-     */
-    public function getDateReservationValid(ExecutionContextInterface $context)
-    {
-            $today = new \DateTime('now');
-            $today->format('Y-m-d');
-
-            $dateReservation = $this->getDateReservation();
-            $dateReservation->format('Y-m-d');
-
-            if( $today == $dateReservation OR 1 == 1) {
-
-                $context
-                    ->buildViolation('Date invalide égale today')
-                    ->atPath('dateReservation')
-                    ->addViolation()
-                ;
-            }
-
-
-
     }
 
 

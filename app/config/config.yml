@@ -77,3 +77,7 @@ assetic:
     jsqueeze:   ~
     scssphp:
       formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+
+#Scribe / stripe
+scribe_stripe:
+  api_key: 'sk_test_aNOpNGrfgCilOUigZu9ymuqt'

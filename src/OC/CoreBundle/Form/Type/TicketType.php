@@ -21,7 +21,6 @@ class TicketType extends AbstractType
            // ->add('codeReservation')
             ->add('dateReservation', DateType::class, array(
                'widget' => 'single_text',
-               'format' => 'yyyy-MM-dd',
              ))
             ->add('fullDay', ChoiceType::class, array(
                 'placeholder' => '',

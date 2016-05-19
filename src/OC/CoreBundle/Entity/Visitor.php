@@ -4,6 +4,7 @@ namespace OC\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\RangeValidator;
 
 /**
  * Visitor
@@ -45,6 +46,11 @@ class Visitor
      *
      * @ORM\Column(name="birthday", type="date")
      * @Assert\Date()
+     * @Assert\Range(
+     *     min = "1910-01-01",
+     *     max = "now",
+     *
+     * )
      */
     protected $birthday;
 
@@ -67,9 +73,17 @@ class Visitor
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="OC\CoreBundle\Entity\Price", inversedBy="price_id")
+     * @ORM\ManyToOne(targetEntity="OC\CoreBundle\Entity\Price")
+     * @ORM\JoinColumn(nullable=false)
      */
     protected $price;
+
+    /**
+     * @ORM\ManyTOOne(targetEntity="OC\CoreBundle\Entity\Customer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $customer;
+
 
 
     /**
@@ -208,6 +222,22 @@ class Visitor
     public function setPrice($price)
     {
         $this->price = $price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param mixed $customer
+     */
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
     }
 
 

@@ -23,6 +23,7 @@
             'bundles/occore/css/bootstrap.css'
             'bundles/occore/css/font-awesome.min.css'
             'bundles/occore/css/main.css'
+
         %}
             <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
         {% endstylesheets %}
@@ -111,6 +112,7 @@
     {% javascripts
         'bundles/occore/js/bootstrap.min.js'
         'bundles/occore/js/main.js'
+        'bundles/occore/js/datepicker.fr.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
@@ -119,6 +121,11 @@
     <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"
             integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
             crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+
 
 {% endblock %}
 

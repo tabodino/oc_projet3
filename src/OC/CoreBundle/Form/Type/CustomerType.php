@@ -3,12 +3,10 @@
 namespace OC\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VisitorType extends AbstractType
+class CustomerType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,13 +15,7 @@ class VisitorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('birthday', DateType::class, array(
-                'widget' => 'single_text',
-            ))
-            ->add('country', TextType::class)
-            ->add('ticket', TicketType::class)
+            ->add('email')
         ;
     }
     
@@ -33,7 +25,7 @@ class VisitorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'OC\CoreBundle\Entity\Visitor'
+            'data_class' => 'OC\CoreBundle\Entity\Customer'
         ));
     }
 }

@@ -60,7 +60,25 @@
         <div class="row centered">
             <div class="col-lg-12">
                 <div class="col-lg-6"><a href="{{ path('oc_core_reservation') }}" class="btn btn-bg btn-default">Ajouter une réservation</a></div>
-                <div class="col-lg-6"><a href="{{ path('oc_core_cart_validate') }}" class="btn btn-bg btn-primary">Finaliser ma commande</a></div>
+                <div class="col-lg-6">
+
+                    <form action="{{ path('oc_core_cart_validated') }}" method="POST">
+                      <script
+                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="pk_test_D695UwU1L8j7SX0UvaKI6CvJ"
+                                data-amount="{{ total*100 }}"
+                                data-name="Paiment"
+                                data-description="carte bancaire"
+                                data-image="{{  asset('bundles/occore/img/logo-2.jpg') }}"
+                                data-locale="auto"
+                                data-zip-code="false"
+                                data-label="Finaliser ma commande"
+                                data-currency="eur">
+
+                        </script>
+                    </form>
+                </div>
+
             </div>
 
         </div>

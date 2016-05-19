@@ -11,8 +11,6 @@ services:
         class: OC\CoreBundle\EntityManager\VisitorManager
         arguments: ["@doctrine.orm.default_entity_manager"]
 
-
-
     # Récupère le panier en session
     oc_core_cart.session:
         class: OC\CoreBundle\Services\CartSession

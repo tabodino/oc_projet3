@@ -5,13 +5,27 @@
 // Fonction datapicker
 $(function() {
     $( "#visitor_birthday" ).datepicker({
-        dateFormat: "yy-mm-dd"
-    });
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        maxDate: 0,
+        yearRange: '1910:yy'
+    }).datepicker("option", $.datepicker.regional["fr"]);
     $( "#visitor_ticket_dateReservation" ).datepicker({
         dateFormat: "yy-mm-dd",
-        //minDate: 0
-        gotoCurrent: true
+        minDate: 0
     });
+
+    $.datepicker.regional['fr'] = {
+        monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+        monthShortNames: ['Janv', 'Fev', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'],
+        monthMinNames: ['Janv', 'Fev', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sept', 'Oct', 'Nov', 'Dec'],
+        dayNames: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+        dayNamesShort: ['lu', 'ma', 'me', 'je', 've', 'sa', 'di'],
+        dayNamesMin: ['lu', 'ma', 'me', 'je', 've', 'sa', 'di'],
+        firstDay: 1
+    };
+    $.datepicker.setDefaults($.datepicker.regional['fr']);
 });
 
 // Récupération et affichage du pays cliqué

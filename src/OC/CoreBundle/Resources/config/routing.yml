@@ -26,6 +26,10 @@ oc_core_cart_remove:
     path:     /panier/supprime/{id}
     defaults: { _controller: OCCoreBundle:Cart:removeFromCart }
 
-oc_core_cart_validate:
-    path:     /panier/validation
+oc_core_cart_validated:
+    path:     /remerciement
     defaults: { _controller: OCCoreBundle:Cart:validateCart }
+
+oc_core_stripe_payment:
+    path:     /paiement
+    defaults: { _controller: OCCoreBundle:Stripe:payment }

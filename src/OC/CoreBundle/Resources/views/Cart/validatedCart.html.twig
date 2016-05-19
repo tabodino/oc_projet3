@@ -1,0 +1,41 @@
+{% extends "OCCoreBundle::layout.html.twig" %}
+
+{% block title %}
+    Valider votre panier - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="blue">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <br>
+                    <h4>VOTRE PAIEMENT A ETE VALIDE</h4>
+                    <p>Vérifiez votre boîte email.</p>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!--  bluewrap -->
+    <div class="container">
+        <div class="row">
+
+
+        </div>
+        <div class="row centered">
+            <div class="col-lg-12">
+                <br>
+                <h4>Merci pour votre commande.</h4><br>
+
+                <p>Votre commande a bien été enregistrée.<p>
+                <p>Vous allez recevoir par email vos billets pour le musée du Louvre.</p>
+                <p>Nous sommes heureux de vous compter parmis nos prochains visiteurs.</p>
+                <p>Nous vous souhaitons une agréable visite.</p>
+                <br>
+                <a href="{{ path('oc_core_homepage') }}" class="btn btn-primary btn-lg">Retour à l'accueil du site</a>
+            </div>
+            </div>
+
+        </div>
+        <br><br><br>
+    </div>
+{% endblock %}
