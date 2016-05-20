@@ -23,11 +23,28 @@ class VisitorRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+
+    // Méthode pour retouver un visiteur/réservation
+    public function findVisitorById($id)
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->select('v')
+            ->join('v.ticket', 't')
+            ->join('v.price', 'p')
+            ->where('v.id = :id')
+            ->andWhere('t.id = v.ticket')
+            ->andWhere('p.id = v.price')
+            ->setParameter('id', $id)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     // Méthode pour trouver les billets d'un client
     public function getVisitorByCustomerId($customerId)
     {
         $qb = $this->createQueryBuilder('v')
-            ->select('v.firstname, v.lastname, t.codeReservation, t.dateReservation, p.price')
+            ->select('v.firstname, v.lastname, t.codeReservation, t.dateReservation, p.price, t.fullDay, p.category')
             ->join('v.customer', 'c')
             ->join('v.price', 'p')
             ->leftJoin('v.ticket', 't')
@@ -36,7 +53,11 @@ class VisitorRepository extends EntityRepository
             ->setParameter('customerId', $customerId)
         ;
 
+        //var_dump($qb->getQuery()->getResult()); die();
+
         return $qb->getQuery()->getResult();
     }
+
+    
     
 }

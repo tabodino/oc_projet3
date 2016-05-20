@@ -66,15 +66,15 @@ class CartController extends Controller
 
 
             // Probleme manager voir entitymanager
-          /*  $em = $this->getDoctrine()->getManager();
+           // $em = $this->getDoctrine()->getManager();
 
-            $visitor = $em->getRepository('OCCoreBundle:Visitor')->find($id);
+            //$visitor = $em->getRepository('OCCoreBundle:Visitor')->find($id);
 
-            $em->remove($visitor);
+            //var_dump($visitor); die();
 
-            $em->flush();*/
-            $visitor = $this->get('oc_core_visitor.manager')->find($id);
-            var_dump($visitor); die();
+          //  $em->remove($visitor);
+
+           // $em->flush();
 
         }
 
@@ -91,15 +91,27 @@ class CartController extends Controller
         // Procédure si formulaire validé
         if ($formHandler->process()) {
             $em = $this->getDoctrine()->getManager();
-            $visitors = $em->getRepository('OCCoreBundle:Visitor')->getVisitorByCustomerId($customer->getId());
+            $visitors = $em->getRepository('OCCoreBundle:Visitor')->getVisitorByCustomerId(30);
             // Qr code + envoi mail + pdf
+            // envoi email
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Billets Musée du Louvre')
+                ->setFrom('noreply@louvre.fr')
+                ->setTo($customer->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'OCCoreBundle:Emails:reservation.html.twig',
+                        array('visitors' => $visitors)
+                    ), 'text/html'
+                )
+            ;
+
+            $this->get('mailer')->send($message);
 
         }
-
-
-
-
         // Vider la session + envoi email + generation qrcode
+        $this->get('oc_core_cart.session')->getSession()->clear();
+
 
         return $this->render('OCCoreBundle:Cart:validatedCart.html.twig');
     }

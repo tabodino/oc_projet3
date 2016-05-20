@@ -29,7 +29,4 @@ oc_core_cart_remove:
 oc_core_cart_validated:
     path:     /remerciement
     defaults: { _controller: OCCoreBundle:Cart:validateCart }
-
-oc_core_stripe_payment:
-    path:     /paiement
-    defaults: { _controller: OCCoreBundle:Stripe:payment }
+   # methods:  [POST]

@@ -65,7 +65,7 @@ class Visitor
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Ticket", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Ticket", cascade={"persist"})
      */
     protected $ticket;
 
@@ -79,8 +79,8 @@ class Visitor
     protected $price;
 
     /**
-     * @ORM\ManyTOOne(targetEntity="OC\CoreBundle\Entity\Customer")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="OC\CoreBundle\Entity\Customer")
+     * @ORM\JoinColumn(nullable=true)
      */
     protected $customer;
 
