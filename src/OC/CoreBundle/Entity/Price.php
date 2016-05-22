@@ -19,42 +19,50 @@ class Price
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="category", type="string", length=150)
      */
-    private $category;
+    protected $category;
 
     /**
      * @var string
      *
      * @ORM\Column(name="price", type="decimal", precision=5, scale=2)
      */
-    private $price;
+    protected $price;
 
     /**
      * @var string
      *
      * @ORM\Column(name="age_min", type="smallint", nullable=true)
      */
-    private $ageMin;
+    protected $ageMin;
 
     /**
      * @var string
      *
      * @ORM\Column(name="age_max", type="smallint", nullable=true)
      */
-    private $ageMax;
+    protected $ageMax;
 
     /**
      * @var string
      *
      * @ORM\Column(name="rule", type="string", length=255, nullable=true)
      */
-    private $rule;
+    protected $rule;
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
 
     /**

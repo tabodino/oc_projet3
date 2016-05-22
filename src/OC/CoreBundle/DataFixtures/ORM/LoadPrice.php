@@ -8,11 +8,13 @@
 
 namespace OC\CoreBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use OC\CoreBundle\Entity\Price;
 
-class LoadPrice implements FixtureInterface
+class LoadPrice extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * Load data fixtures with the passed EntityManager
@@ -21,7 +23,7 @@ class LoadPrice implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-
+        $id = 0;
         $prices = array();
         // param array(category, price, ageMin, ageMax, condition)
         $prices[0] = array('petit', 0, 0, 4, null);
@@ -32,7 +34,9 @@ class LoadPrice implements FixtureInterface
         $prices[5] = array('famille', 35, null, null, "Même nom de famille requis");
 
         foreach ($prices as $pr) {
+            $id++;
             $price = new Price();
+            $price->setId($id);
             $price->setCategory($pr[0]);
             $price->setPrice($pr[1]);
             $price->setAgeMin($pr[2]);
@@ -40,8 +44,19 @@ class LoadPrice implements FixtureInterface
             $price->setRule($pr[4]);
 
             $manager->persist($price);
+            $this->addReference('price'.$id, $price);
         }
 
         $manager->flush();
+    }
+
+    /**
+     * Get the order of this fixture
+     *
+     * @return integer
+     */
+    public function getOrder()
+    {
+       return 1;
     }
 }

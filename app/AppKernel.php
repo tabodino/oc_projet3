@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new OC\CoreBundle\OCCoreBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Scribe\StripeBundle\ScribeStripeBundle(),
+            new Endroid\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
 
 
         ];

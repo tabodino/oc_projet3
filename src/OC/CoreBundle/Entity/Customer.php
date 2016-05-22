@@ -19,7 +19,7 @@ class Customer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
 
     /**
@@ -27,7 +27,7 @@ class Customer
      *
      * @ORM\Column(name="email", type="string", length=150)
      */
-    private $email;
+    protected $email;
 
 
     /**
@@ -35,7 +35,7 @@ class Customer
      *
      * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
     
 
 

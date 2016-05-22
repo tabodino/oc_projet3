@@ -26,6 +26,11 @@ class CoreController extends Controller
     // La page d'accueil
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $test = $em->getRepository('OCCoreBundle:Visitor')->getVisitorByCustomerId(171);
+
+        var_dump($test); die();
+
         return $this->render('OCCoreBundle:Core:index.html.twig');
     }
 
@@ -44,7 +49,7 @@ class CoreController extends Controller
         //Nouvel objet visiteur
         $visitor = new Visitor();
         // Création formulaire
-        $form = $this->get('form.factory')->create(VisitorType::class, $visitor);
+        $form = $this->createForm(VisitorType::class, $visitor);
         // Instance du form handler client
         $formHandler = new VisitorFormHandler($form, $request, $this->getDoctrine()->getManager(), $visitor);
         // Procédure si formulaire validé
@@ -56,8 +61,6 @@ class CoreController extends Controller
     // Requete ajax autocompletion pays
     public function completeCountryAction(Request $request, $word)
     {
-        // récuperation du pays en paramètre
-        $country = $request->get('word');
         // Tableau vide en cas d'erreur ajax
         $countries = array();
         // Verifie si la requete est en Ajax
@@ -65,6 +68,5 @@ class CoreController extends Controller
 
         return $this->render('OCCoreBundle:Core:completeCountry.html.twig', array('countries' => $countries));
     }
-
 
 }

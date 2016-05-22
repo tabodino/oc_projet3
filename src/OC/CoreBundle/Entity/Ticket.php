@@ -22,14 +22,14 @@ class Ticket
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="code_reservation", type="string", length=100)
      */
-    private $codeReservation;
+    protected $codeReservation;
 
     /**
      * @var \DateTime
@@ -49,14 +49,14 @@ class Ticket
      * @ORM\Column(name="full_day", type="boolean")
      * @Assert\NotBlank()
      */
-    private $fullDay;
+    protected $fullDay;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="reduced", type="boolean")
      */
-    private $reduced;
+    protected $reduced;
 
 
 

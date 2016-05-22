@@ -16,15 +16,31 @@
         </tr>
 
         {% for visitor in visitors %}
-                <tr>
+            <tr>
                 <td>
                     <h4 class="panel-title">Réservation n° {{ visitor.codeReservation }}</h4>
-                </td></tr>
+                </td>
+            </tr>
 
-                 <tr>   <td><i class="fa fa-user"></i> Réservation au nom de : {{ visitor.firstname|capitalize }} {{ visitor.lastname|capitalize }}</td>
-                  </tr>
-                   <tr> <td>{{ visitor.price}} €</td></tr>
+            <tr>
+                <td><i class="fa fa-user"></i> Réservation au nom de : {{ visitor.firstname|capitalize }} {{ visitor.lastname|capitalize }}</td>
+            </tr>
 
+            <tr>
+                <td>Tarif : {{ visitor.category }}</td>
+            </tr>
+
+            <tr>
+                <td>Billet valable le : {{ visitor.dateReservation|date('d/m/Y') }}</td>
+            </tr>
+
+            <tr>
+                <td>{{ visitor.price}} €</td>
+            </tr>
+            
+            <tr>
+                <td><img src="{{ qrcode_url(path('oc_core_cart_view_reservation', {'codeReservation': visitor.codeReservation }), extension="png") }}" alt=""></td>
+            </tr>
 
         {% endfor %}
 

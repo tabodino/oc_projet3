@@ -21,7 +21,7 @@ class Visitor
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -74,16 +74,13 @@ class Visitor
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="OC\CoreBundle\Entity\Price")
-     * @ORM\JoinColumn(nullable=false)
      */
     protected $price;
 
     /**
      * @ORM\ManyToOne(targetEntity="OC\CoreBundle\Entity\Customer")
-     * @ORM\JoinColumn(nullable=true)
      */
     protected $customer;
-
 
 
     /**
@@ -239,8 +236,6 @@ class Visitor
     {
         $this->customer = $customer;
     }
-
-
 
 }
 

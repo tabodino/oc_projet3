@@ -66,7 +66,7 @@ class CartController extends Controller
 
 
             // Probleme manager voir entitymanager
-           // $em = $this->getDoctrine()->getManager();
+            //$em = $this->getDoctrine()->getManager();
 
             //$visitor = $em->getRepository('OCCoreBundle:Visitor')->find($id);
 
@@ -114,6 +114,11 @@ class CartController extends Controller
 
 
         return $this->render('OCCoreBundle:Cart:validatedCart.html.twig');
+    }
+
+    public function viewReservationAction($codeReservation)
+    {
+        return $this->render('OCCoreBundle:Cart:viewReservation.html.twig');
     }
 
 }
