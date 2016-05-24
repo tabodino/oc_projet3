@@ -5,7 +5,7 @@
 </head>
 <body>
 <style type="text/css">
-    table{magin: 0 auto; text-align:center; cellspacing=0; width:100%;}
+    table{margin: 0 auto; text-align:center; cellspacing:0; width:100%;}
 </style>
     <table>
         <tr>
@@ -41,7 +41,7 @@
             </tr>
 
             <tr>
-                <td>QR-Code ici</td>
+                <td><qrcode value="{{ path('oc_core_cart_view_reservation', {'codeReservation': visitor.ticket.codeReservation}) }}" ec="L" style="width: 30mm;"></qrcode></td>
             </tr>
             
             <tr>

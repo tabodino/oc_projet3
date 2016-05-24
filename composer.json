@@ -28,7 +28,9 @@
         "stof/doctrine-extensions-bundle": "^1.2.2",
         "fzaninotto/Faker": "^1.5",
         "scribe/stripe-bundle": "dev-master",
-        "ensepar/html2pdf-bundle" : "~2.0"
+        "ensepar/html2pdf-bundle": "~2.0",
+        "endroid/qrcode-bundle": "dev-master"
+
 
     },
     "require-dev": {

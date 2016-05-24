@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Scribe\StripeBundle\ScribeStripeBundle(),
             new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
-
+            new Endroid\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
 
         ];
 

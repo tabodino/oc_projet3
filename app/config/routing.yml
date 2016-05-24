@@ -2,3 +2,8 @@ oc_core:
     resource: "@OCCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
+EndroidQrCodeBundle:
+    resource: "@EndroidQrCodeBundle/Controller/"
+    type:     annotation
+    prefix:   /qrcode
+

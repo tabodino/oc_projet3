@@ -92,6 +92,7 @@ class CartController extends Controller
             // Envoi email confirmation
             $this->get('oc_core_reservation_email')->reservationConfirm($customer->getEmail(), $visitors);
             
+            
         }
         // Vider la session + envoi email + generation qrcode
         //$this->get('oc_core_cart.session')->getSession()->clear();

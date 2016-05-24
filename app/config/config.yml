@@ -94,3 +94,14 @@ ensepar_html2pdf:
     unicode: true
     encoding: UTF-8
     margin: [10,15,10,15]
+
+#Endroid / QR-Code
+endroid_qr_code:
+    size: 100
+    padding: 10
+    extension: gif
+    error_correction_level: high
+    foreground_color: { r: 0, g: 0, b: 0, a: 0 }
+    background_color: { r: 255, g: 255, b: 255, a: 0 }
+    label: "My label"
+    label_font_size: 16
