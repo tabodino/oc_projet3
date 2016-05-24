@@ -19,8 +19,6 @@ class AppKernel extends Kernel
             new OC\CoreBundle\OCCoreBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Scribe\StripeBundle\ScribeStripeBundle(),
-            new Spraed\PDFGeneratorBundle\SpraedPDFGeneratorBundle(),
-            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
 
 

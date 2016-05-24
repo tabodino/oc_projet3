@@ -87,34 +87,11 @@ class CartController extends Controller
 
         // Procédure si formulaire validé
         if ($formHandler->process()) {
-
             // Récupère les visiteurs correspondant au client
             $visitors = $this->get('oc_core_visitor.manager')->setVisitorByCustomerId($customer->getId(), $cart);
-
-
-            // Qr code + envoi mail + pdf
-            // envoi email
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Billets Musée du Louvre')
-                ->setFrom('noreply@louvre.fr')
-                ->setTo($customer->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'OCCoreBundle:Emails:confirmReservation.html.twig'
-                    ), 'text/html'
-                )
-            ;
-
-            foreach ($visitors as $visitor) {
-               // $html2pdf = $this->get('oc_core_pdf_generator');
-                $html = $this->render('OCCoreBundle:Emails:reservation.html.twig', array('visitor' => $visitor));
-                $codeReservation = $visitor->getTicket()->getCodeReservation();
-                $this->get('oc_core_pdf_generator')->generate($html, $codeReservation);
-                $message->attach(\Swift_Attachment::fromPath('./pdf/reservation'.$codeReservation.'.pdf'));
-            }
-
-            $this->get('mailer')->send($message);
-
+            // Envoi email confirmation
+            $this->get('oc_core_reservation_email')->reservationConfirm($customer->getEmail(), $visitors);
+            
         }
         // Vider la session + envoi email + generation qrcode
         //$this->get('oc_core_cart.session')->getSession()->clear();

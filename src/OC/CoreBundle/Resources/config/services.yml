@@ -19,3 +19,8 @@ services:
     # Converti le html en PDF
     oc_core_pdf_generator:
         class: OC\CoreBundle\Services\ReservationPdfGenerator
+
+    # Envoi email reservation
+    oc_core_reservation_email:
+        class: OC\CoreBundle\Services\Mailer
+        arguments: ["@mailer", "@templating", "@oc_core_pdf_generator"]

@@ -72,6 +72,7 @@ swiftmailer:
     auth_mode: login
     spool:     { type: memory }
 
+# Assetic
 assetic:
   debug:          '%kernel.debug%'
   use_controller: '%kernel.debug%'
@@ -85,16 +86,7 @@ assetic:
 scribe_stripe:
   api_key: 'sk_test_aNOpNGrfgCilOUigZu9ymuqt'
 
-knp_snappy:
-    pdf:
-        enabled:    true
-        binary:     /home/scripts/wkhtmltopdf
-        options:    []
-    image:
-        enabled:    true
-        binary:     /home/scripts/wkhtmltoimage
-        options:    []
-
+#HTML2PDF
 ensepar_html2pdf:
     orientation: P
     format: A4
