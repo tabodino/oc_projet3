@@ -72,7 +72,6 @@ class VisitorFormHandler
         $this->em->persist($this->visitor);
 
         $this->em->flush();
-
     }
 
     public function getreducedPrice()

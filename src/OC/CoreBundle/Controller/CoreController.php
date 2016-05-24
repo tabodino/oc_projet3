@@ -26,11 +26,6 @@ class CoreController extends Controller
     // La page d'accueil
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $test = $em->getRepository('OCCoreBundle:Visitor')->getVisitorByCustomerId(171);
-
-        var_dump($test); die();
-
         return $this->render('OCCoreBundle:Core:index.html.twig');
     }
 

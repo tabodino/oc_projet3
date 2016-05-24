@@ -15,3 +15,7 @@ services:
     oc_core_cart.session:
         class: OC\CoreBundle\Services\CartSession
         arguments: ["@request_stack"]
+
+    # Converti le html en PDF
+    oc_core_pdf_generator:
+        class: OC\CoreBundle\Services\ReservationPdfGenerator

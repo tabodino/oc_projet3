@@ -24,22 +24,6 @@ class VisitorRepository extends EntityRepository
     }
 
 
-    // Méthode pour retouver un visiteur/réservation
-  /*  public function findVisitorById($id)
-    {
-        $qb = $this->createQueryBuilder('v')
-            ->select('v')
-            ->join('v.ticket', 't')
-            ->join('v.price', 'p')
-            ->where('v.id = :id')
-            ->andWhere('t.id = v.ticket')
-            ->andWhere('p.id = v.price')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()->getResult();
-    }*/
-
     // Méthode pour trouver les billets d'un client
     public function getVisitorByCustomerId($customerId)
     {
@@ -57,25 +41,51 @@ class VisitorRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    // Méthode pur retrouver un visiteur
     public function findVisitorById($id)
     {
         $qb = $this->createQueryBuilder('v')
-            ->select('v, t', 'p', 'c')
+            ->select('v, t', 'p')
+            ->join('v.ticket', 't')
+            ->join('v.price', 'p')
+            ->where('v.ticket = t.id')
+            ->andWhere('v.price = p.id')
+            ->andWhere('v.id = :id')
+            ->setParameter('id', $id)
+        ;
+
+        return $qb->getQuery()->getSingleResult();
+
+    }
+
+    // Méthode pour enregistrer l'identifiant client
+    public function setCustomerId($customerId, $id)
+    {
+        $this->createQueryBuilder('v')
+            ->update('OCCoreBundle:Visitor','v')
+            ->set('v.customer', '?1')
+            ->where('v.id = ?2')
+            ->setParameters(array('1' => $customerId, '2' => $id))
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
+    public function getVisitorByCodeReservation($codeReservation)
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->select('v, t, p, c')
             ->join('v.ticket', 't')
             ->join('v.price', 'p')
             ->join('v.customer', 'c')
             ->where('v.ticket = t.id')
             ->andWhere('v.price = p.id')
             ->andWhere('v.customer = c.id')
-            ->andWhere('v.id = :id')
-            ->setParameter('id', $id)
+            ->andWhere('t.codeReservation = :codeReservation')
+            ->setParameter('codeReservation', $codeReservation)
         ;
 
-        return $qb->getQuery()->getResult();
-
+        return $qb->getQuery()->getSingleResult();
     }
 
-
-    
-    
 }

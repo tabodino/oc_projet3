@@ -1,0 +1,85 @@
+{% extends "OCCoreBundle::layoutEmail.html.twig" %}
+
+{% block title %}
+    Votre réservation - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div id="blue">
+    <div class="container">
+        <div class="row centered">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h4>CONFIRMATION DE VOTRE RESERVATION</h4>
+                <p>RESERVATION n° {{ visitor.ticket.codeReservation }}</p>
+            </div>
+        </div><!-- row -->
+    </div><!-- container -->
+</div><!--  bluewrap -->
+
+    <div class="container">
+        {% if visitor !=null %}
+            <div class="row">
+                <br>
+                <h3 class="text-center">Détail de votre réservation</h3><br>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><img src="bundles/occore/img/logo-2.jpg" alt="logo joconde"> Musée du Louvre<span class="pull-right">Billet n° {{ visitor.ticket.codeReservation }}</span></h4>
+                        </div>
+                        <div class="panel-body">
+                            <p><i class="fa fa-user"></i> Réservation au nom de : {{ visitor.firstname|capitalize }} {{ visitor.lastname|capitalize }}</p>
+                            <p><i class="fa fa-money"></i> Tarif {{ visitor.price.category}} <strong>{{ visitor.price.price }}</strong> €</p>
+                            <p><i class="fa fa-ticket"></i> Billet valable le : {{ visitor.ticket.dateReservation|date('d/m/Y') }}
+                                {%  if visitor.ticket.fullDay == 0 %}
+                                    à partir de 14h00
+                                {% else %}
+                                    toute la journée
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="panel-footer">
+                            <a href="#" class="btn btn-primary "><i class="fa fa-print"></i> Imprimer cette réservation</a>
+                        </div>
+
+                    </div>
+
+            </div>
+            <br><br>
+            <div class="row centered">
+                <div class="col-lg-12">
+
+                    <a href="{{ path('oc_core_homepage') }}" class="btn btn-bg btn-default"><i class="fa fa-home"></i> Retour à l'acccueil du site</a>
+
+                </div>
+
+
+            </div>
+
+            <br><br><br>
+
+        {% else %}
+            <div class="row centered">
+                <div class="col-lg-12">
+                    <h3>Votre panier est vide.</h3>
+                    <p>Vous avez actuellement aucune réservation pour le musée.</p>
+                </div>
+                <br>
+                <div class="col-lg-12">
+                    <h3>Que souhaitez-vous faire maintenant ?</h3>
+                    <br><br>
+                    <a href="{{ path('oc_core_reservation') }}" class="btn btn-lg btn-info btn-block"><i class="fa fa-plus"></i> Ajouter une réservation</a>
+                    <br>
+                    <a href="{{ path('oc_core_pricelist') }}" class="btn btn-lg btn-default btn-block"><i class="fa fa-eye"></i> Consulter les tarifs</a>
+                </div>
+                <br><br><br>
+                <br><br><br>
+
+            </div>
+
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

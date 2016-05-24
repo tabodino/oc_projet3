@@ -27,7 +27,10 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "stof/doctrine-extensions-bundle": "^1.2.2",
         "fzaninotto/Faker": "^1.5",
-        "scribe/stripe-bundle": "dev-master"
+        "scribe/stripe-bundle": "dev-master",
+        "spraed/pdf-generator-bundle": "v1.0",
+        "knplabs/knp-snappy-bundle": "dev-master",
+        "ensepar/html2pdf-bundle" : "~2.0"
 
     },
     "require-dev": {

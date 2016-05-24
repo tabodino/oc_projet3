@@ -85,13 +85,20 @@ assetic:
 scribe_stripe:
   api_key: 'sk_test_aNOpNGrfgCilOUigZu9ymuqt'
 
-#QrCodeBundle
-endroid_qr_code:
-  size: 100
-  padding: 10
-  extension: gif
-  error_correction_level: high
-  foreground_color: { r: 0, g: 0, b: 0, a: 0 }
-  background_color: { r: 255, g: 255, b: 255, a: 0}
-  label: "QR-Code"
-  label_font_size: 16
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /home/scripts/wkhtmltopdf
+        options:    []
+    image:
+        enabled:    true
+        binary:     /home/scripts/wkhtmltoimage
+        options:    []
+
+ensepar_html2pdf:
+    orientation: P
+    format: A4
+    lang: en
+    unicode: true
+    encoding: UTF-8
+    margin: [10,15,10,15]
