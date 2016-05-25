@@ -39,3 +39,25 @@ oc_core_cart_view_reservation:
 oc_core_cart_test:
     path:     /test
     defaults: { _controller: OCCoreBundle:Cart:test }
+
+
+#paypal test
+oc_core_paypal:
+    path: /paypal
+    defaults: { _controller: OCCoreBundle:Paypal:setExpressCheckout }
+
+oc_core_paypal_success:
+    path: /paypal/success
+    defaults: { _controller: OCCoreBundle:Paypal:getExpressCheckoutDetails }
+
+oc_core_paypal_error:
+    path: /paypal/error
+    defaults: { _controller: OCCoreBundle:Paypal:errorPayment }
+
+oc_core_paypal_payment:
+    path: /paypal/payment
+    defaults: { _controller: OCCoreBundle:Paypal:doExpressCheckoutPayment }
+
+oc_core_paypal_validated:
+    path: /paypal/validated
+    defaults: { _controller: OCCoreBundle:Paypal:validatedCartPaypal }

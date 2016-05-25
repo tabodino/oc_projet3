@@ -35,10 +35,10 @@ class CartController extends Controller
             'cart' => $cart,
         ));
     }
-    
+
 
     // Ajout au panier
-    public function addCartAction($id, Request $request)
+    public function addCartAction($id)
     {
         // Service session panier
         $cart = $this->get('oc_core_cart.session')->cartSession();
@@ -53,7 +53,7 @@ class CartController extends Controller
         return $this->redirectToRoute('oc_core_cart_view');
     }
 
-    
+
     // Supprimer du panier
     public function removeFromCartAction($id)
     {
@@ -61,8 +61,7 @@ class CartController extends Controller
         $cart = $this->get('oc_core_cart.session')->cartSession();
 
         // Vérifier si l'id produit est bien dans le panier
-        if (array_key_exists($id, $cart))
-        {
+        if (array_key_exists($id, $cart)) {
             // Supprime le produit du panier
             unset($cart[$id]);
             // Mise à jour de la session
@@ -70,10 +69,10 @@ class CartController extends Controller
             // Suppression en bdd
             $this->get('oc_core_visitor.manager')->remove($id);
         }
-        
+
         return $this->redirectToRoute('oc_core_cart_view');
     }
-    
+
 
     // Validation panier
     public function validateCartAction(Request $request)
@@ -91,11 +90,11 @@ class CartController extends Controller
             $visitors = $this->get('oc_core_visitor.manager')->setVisitorByCustomerId($customer->getId(), $cart);
             // Envoi email confirmation
             $this->get('oc_core_reservation_email')->reservationConfirm($customer->getEmail(), $visitors);
-            
-            
+
+
         }
-        // Vider la session + envoi email + generation qrcode
-        //$this->get('oc_core_cart.session')->getSession()->clear();
+        // Vide la session
+        $this->get('oc_core_cart.session')->getSession()->clear();
 
         return $this->render('OCCoreBundle:Cart:validatedCart.html.twig');
     }
@@ -109,5 +108,4 @@ class CartController extends Controller
 
         return $this->render('OCCoreBundle:Emails:reservation.html.twig', array('visitor' => $visitor));
     }
-
-}
+}  

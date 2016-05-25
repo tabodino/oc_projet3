@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "31dcad03afb487e72d6ab3deba326046",
-    "content-hash": "b0da9c9af395e29e97a6c04311e1df2e",
+    "hash": "4636ea7ab7055e68b7ffedb326d86c13",
+    "content-hash": "83118900674af8cb898f38f0b77036f4",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1547,6 +1547,58 @@
             "time": "2016-01-15 02:50:06"
         },
         {
+            "name": "mmoreram/symfony-bundle-dependencies",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mmoreram/symfony-bundle-dependencies.git",
+                "reference": "34b33b947558d1ab3a018f3de8255ecfc1135b01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mmoreram/symfony-bundle-dependencies/zipball/34b33b947558d1ab3a018f3de8255ecfc1135b01",
+                "reference": "34b33b947558d1ab3a018f3de8255ecfc1135b01",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4|^7.0",
+                "symfony/http-kernel": "^2.2|^3.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "1.11",
+                "mmoreram/php-formatter": "1.1.0",
+                "phpunit/phpunit": "4.8.19"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mmoreram\\SymfonyBundleDependencies\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                }
+            ],
+            "description": "Dependencies resolver for Symfony Bundles",
+            "keywords": [
+                "bundle",
+                "dependencies",
+                "symfony"
+            ],
+            "time": "2015-12-10 19:34:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.19.0",
             "source": {
@@ -1713,6 +1765,126 @@
                 "minification"
             ],
             "time": "2015-03-25 10:11:08"
+        },
+        {
+            "name": "paymentsuite/payment-core-bundle",
+            "version": "v1.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PaymentSuite/PaymentCoreBundle.git",
+                "reference": "f4f08066327e174e54d1213b044a906689b7f80e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PaymentSuite/PaymentCoreBundle/zipball/f4f08066327e174e54d1213b044a906689b7f80e",
+                "reference": "f4f08066327e174e54d1213b044a906689b7f80e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "psr/log": "~1.0",
+                "symfony/config": ">=2.2",
+                "symfony/dependency-injection": ">=2.2",
+                "symfony/event-dispatcher": ">=2.2",
+                "symfony/http-kernel": ">=2.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PaymentSuite\\PaymentCoreBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/PaymentSuite/paymentsuite/contributors"
+                }
+            ],
+            "description": "PaymentCore PaymentSuite Component",
+            "keywords": [
+                "ecommerce",
+                "payment",
+                "paymentsuite"
+            ],
+            "time": "2015-03-16 15:18:19"
+        },
+        {
+            "name": "paymentsuite/paypal-web-checkout-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PaymentSuite/PaypalWebCheckoutBundle.git",
+                "reference": "d2d94c9c3cc1d89553341c5e8e5fd82876dcbf72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PaymentSuite/PaypalWebCheckoutBundle/zipball/d2d94c9c3cc1d89553341c5e8e5fd82876dcbf72",
+                "reference": "d2d94c9c3cc1d89553341c5e8e5fd82876dcbf72",
+                "shasum": ""
+            },
+            "require": {
+                "mmoreram/symfony-bundle-dependencies": "^1.0",
+                "paymentsuite/payment-core-bundle": "~1.1",
+                "php": "^5.4|^7.0",
+                "symfony/config": "^2.7|^3.0",
+                "symfony/dependency-injection": "^2.7|^3.0",
+                "symfony/form": "^2.7|^3.0",
+                "symfony/framework-bundle": "^2.7|^3.0",
+                "symfony/http-foundation": "^2.7|^3.0",
+                "symfony/http-kernel": "^2.7|^3.0",
+                "twig/twig": "^1.23.1"
+            },
+            "require-dev": {
+                "elcodi/fixtures-booster-bundle": "^2.0",
+                "elcodi/test-common-bundle": "^2.0",
+                "phpunit/phpunit": "^4.8.19"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PaymentSuite\\PaypalWebCheckoutBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/PaymentSuite/paymentsuite/contributors"
+                }
+            ],
+            "description": "Paypal Web Checkout PaymentSuite Component",
+            "keywords": [
+                "ecommerce",
+                "payment",
+                "redsys",
+                "sermepa"
+            ],
+            "time": "2016-01-30 23:03:14"
         },
         {
             "name": "psr/log",
@@ -2846,7 +3018,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "scribe/stripe-bundle": 20,
-        "endroid/qrcode-bundle": 20
+        "endroid/qrcode-bundle": 20,
+        "paymentsuite/paypal-web-checkout-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -29,7 +29,9 @@
         "fzaninotto/Faker": "^1.5",
         "scribe/stripe-bundle": "dev-master",
         "ensepar/html2pdf-bundle": "~2.0",
-        "endroid/qrcode-bundle": "dev-master"
+        "endroid/qrcode-bundle": "dev-master",
+        "paymentsuite/paypal-web-checkout-bundle": "dev-master",
+        "prims47/paypal-express-checkout-nvp-bundle": "dev-master"
 
 
     },
