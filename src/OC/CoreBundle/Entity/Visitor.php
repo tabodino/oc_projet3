@@ -65,7 +65,7 @@ class Visitor
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Ticket", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Ticket", cascade={"persist", "remove"})
      */
     protected $ticket;
 

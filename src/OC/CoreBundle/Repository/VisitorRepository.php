@@ -85,7 +85,7 @@ class VisitorRepository extends EntityRepository
             ->setParameter('codeReservation', $codeReservation)
         ;
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
 }

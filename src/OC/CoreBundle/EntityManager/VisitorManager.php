@@ -8,7 +8,6 @@
 
 namespace OC\CoreBundle\EntityManager;
 
-
 use Doctrine\ORM\EntityManager;
 
 class VisitorManager
@@ -31,6 +30,13 @@ class VisitorManager
         return $visitor;
     }
 
+    // Méthode pour trouver les réservations du panier
+    public function findArray($array)
+    {
+        return $this->getRepository()->findArray($array);
+    }
+
+
     // Enregistre l'id client pour chaque reservation
     public function setVisitorByCustomerId($customerId, $cart)
     {
@@ -45,6 +51,14 @@ class VisitorManager
     public function getVisitorByCustomerId($customerId)
     {
         return $this->getRepository()->getVisitorByCustomerId($customerId);
+    }
+
+    // Trouve une reservation par son code (QR-Code)
+    public function getVisitorByCodeReservation($codeReservation)
+    {
+        $visitor = $this->getRepository()->getVisitorByCodeReservation($codeReservation);
+        
+        return $visitor;
     }
 
     // Supprime un visiteur/reservation

@@ -9,41 +9,34 @@
 namespace OC\CoreBundle\Controller;
 
 use OC\CoreBundle\Entity\Customer;
-use OC\CoreBundle\EntityManager\VisitorManager;
-use OC\CoreBundle\Form\Handler\CustomerFormHandler;
-use OC\CoreBundle\Form\Handler\VisitorFormHandler;
-use OC\CoreBundle\Form\Type\CustomerType;
-use OC\CoreBundle\Services\ReservationPdfGenerator;
+use OC\CoreBundle\Form\Handler\CustomerStripeFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+
 
 class CartController extends Controller
 {
     // Page panier
-    public function cartAction(Request $request)
+    public function cartAction()
     {
         // Service session panier
         $cart = $this->get('oc_core_cart.session')->cartSession();
 
-        $em = $this->getDoctrine()->getManager();
+        // Récupération des reservations du panier
+        $reservations = $this->get('oc_core_visitor.manager')->findArray(array_keys($cart));
 
-        $reservations = $em->getRepository('OCCoreBundle:Visitor')->findArray(array_keys($cart));
 
-        return $this->render('OCCoreBundle:Cart:cart.html.twig', array(
-            'reservations' => $reservations,
-            'cart' => $cart,
-        ));
+        return $this->render('OCCoreBundle:Cart:cart.html.twig', array('reservations' => $reservations));
     }
-
-
+    
+    
     // Ajout au panier
     public function addCartAction($id)
     {
         // Service session panier
         $cart = $this->get('oc_core_cart.session')->cartSession();
 
-        // définie la quantité à 1
+        // Définie la quantité à 1
         $cart[$id] = 1;
 
         // Ajout de la quantité à la session
@@ -81,8 +74,8 @@ class CartController extends Controller
         $cart = $this->get('oc_core_cart.session')->cartSession();
 
         $customer = new Customer();
-        // Instance du form handler client
-        $formHandler = new CustomerFormHandler($request, $this->getDoctrine()->getManager(), $customer);
+        // Instance du form handler client stripe
+        $formHandler = new CustomerStripeFormHandler($request, $this->getDoctrine()->getManager(), $customer);
 
         // Procédure si formulaire validé
         if ($formHandler->process()) {
@@ -90,8 +83,6 @@ class CartController extends Controller
             $visitors = $this->get('oc_core_visitor.manager')->setVisitorByCustomerId($customer->getId(), $cart);
             // Envoi email confirmation
             $this->get('oc_core_reservation_email')->reservationConfirm($customer->getEmail(), $visitors);
-
-
         }
         // Vide la session
         $this->get('oc_core_cart.session')->getSession()->clear();
@@ -99,13 +90,12 @@ class CartController extends Controller
         return $this->render('OCCoreBundle:Cart:validatedCart.html.twig');
     }
 
-
+    // Vérification réservation QR-Code
     public function viewReservationAction($codeReservation)
     {
-        $em = $this->getDoctrine()->getManager();
+        // Trouve une réservation par rapport à son code
+        $visitor = $this->get('oc_core_visitor.manager')->getVisitorByCodeReservation($codeReservation);
 
-        $visitor = $em->getRepository('OCCoreBundle:Visitor')->getVisitorByCodeReservation($codeReservation);
-
-        return $this->render('OCCoreBundle:Emails:reservation.html.twig', array('visitor' => $visitor));
+        return $this->render('OCCoreBundle:Cart:viewReservation.html.twig', array('visitor' => $visitor));
     }
 }  

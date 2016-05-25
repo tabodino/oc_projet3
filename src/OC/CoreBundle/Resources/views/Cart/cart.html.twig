@@ -69,6 +69,13 @@
                 {% if total != 0 %}
                     <div class="col-lg-6">
 
+                        <form action='{{ path('oc_core_paypal') }}' METHOD='POST'>
+                           <!-- <input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal'/>-->
+                            <button type="submit" class="btn btn-info pull-left"><strong>Régler via PayPal</strong></button>
+                            <input type="hidden" name="amount" value="{{ total }}">
+                            <input type="hidden" name="currency_code" value="EUR">
+                        </form>
+
                         <form action="{{ path('oc_core_cart_validated') }}" method="POST">
                           <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -79,23 +86,16 @@
                                     data-image="{{  asset('bundles/occore/img/logo-2.jpg') }}"
                                     data-locale="auto"
                                     data-zip-code="false"
-                                    data-label="Finaliser ma commande"
+                                    data-label="Régler par carte bancaire"
                                     data-currency="eur">
 
-                            </script>
+                          </script>
                         </form>
                     </div>
                 {% else %}
                     <div class="col-lg-6"><strong>Les enfants de moins de 12 ans doivent être accompagnés par un adulte.</strong></div>
                 {% endif %}
             </div>
-
-
-     <form action='{{ path('oc_core_paypal') }}' METHOD='POST'>
-                <input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal'/>
-                <input type="hidden" name="amount" value="{{ total }}">
-                <input type="hidden" name="currency_code" value="EUR">
-            </form>
 
         </div>
 

@@ -18,8 +18,24 @@
     </div><!-- container -->
 </div><!--  bluewrap -->
 <div class="container">
-    <div class="row">
+    <div class="row centered">
+        <div class="col-lg-12">
 
+            <br><br>
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Une erreur est survenue</h4>
+                </div>
+                <div class="panel-body">
+                    <p>La transaction a échouée.</p>
+                    <p>Votre compte ne sera pas débité.</p>
+                    <p>Nous vous invitons a recommencer l'opération.</p>
+                </div>
+            </div>
+            <br><br>
+            <a href="{{ path('oc_core_homepage') }}" class="btn btn-primary btn-lg">Retour à l'accueil du site</a>
+            <br><br>
+        </div>
     </div>
 </div>
 

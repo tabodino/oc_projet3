@@ -9,6 +9,7 @@
 namespace OC\CoreBundle\Controller;
 
 use OC\CoreBundle\Entity\Customer;
+use OC\CoreBundle\Form\Handler\CustomerPayPalFormHandler;
 use OC\CoreBundle\Services\Paypal;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +20,9 @@ class PaypalController extends Controller
     public function setExpressCheckoutAction(Request $request)
     {
         $paypal = new Paypal();
+
         $params = array(
-            'PAYMENTREQUEST_0_PAYMENTACTION' => "SALE",
-            'PAYMENTREQUEST_0_CURRENCYCODE' => "EUR",
-            'PAYMENTREQUEST_0_AMT' => 10.0,
+            'PAYMENTREQUEST_0_AMT' => $request->get('amount'),
             'RETURNURL' => 'http://localhost/oc_projet3/web/app_dev.php/paypal/success',
             'CANCELURL' => "http://localhost/oc_projet3/web/app_dev.php/paypal/error",
         );
@@ -38,7 +38,6 @@ class PaypalController extends Controller
 
             return $this->render('OCCoreBundle:Paypal:errorPaypal.html.twig');
         }
-
     }
     
     // Transaction paypal
@@ -82,10 +81,9 @@ class PaypalController extends Controller
         ));
 
         if ($resp) {
-            $transactionId = $resp['PAYMENTINFO_0_TRANSACTIONID'];
             return $this->redirectToRoute('oc_core_paypal_validated');
         }else {
-            die('Le prélèvement à échoué, votre compte ne sera pas débité.');
+            return $this->render('OCCoreBundle:Paypal:errorPaypal.html.twig');
         }
     }
 
@@ -94,20 +92,19 @@ class PaypalController extends Controller
         $customer = new Customer();
         // Service session panier
         $cart = $this->get('oc_core_cart.session')->cartSession();
-        // Modifie l'adresse email pour test envoi reservation
+        // Modifie l'adresse email pour test envoi reservation (uniquement pour les tests)
         $testEmail = str_replace("-buyer","" , $cart['email']);
 
+        // Instance du form handler client stripe
+        $formHandler = new CustomerPayPalFormHandler($request, $this->getDoctrine()->getManager(), $customer);
 
-        $customer->setEmail($testEmail);
-        $em = $this->getDoctrine()->getManager();
-        $em->getRepository('OCCoreBundle:Customer');
-        $em->persist($customer);
-        $em->flush();
-
+        // Procédure si formulaire validé
+        $formHandler->process($testEmail);
         // Récupère les visiteurs correspondant au client
         $visitors = $this->get('oc_core_visitor.manager')->setVisitorByCustomerId($customer->getId(), $cart);
         // Envoi email confirmation
         $this->get('oc_core_reservation_email')->reservationConfirm($customer->getEmail(), $visitors);
+
         // Vide la session
         $this->get('oc_core_cart.session')->getSession()->clear();
 

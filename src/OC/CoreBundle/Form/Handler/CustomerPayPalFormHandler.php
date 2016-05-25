@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: jm
- * Date: 19/05/16
- * Time: 14:31
+ * Date: 25/05/16
+ * Time: 19:49
  */
 
 namespace OC\CoreBundle\Form\Handler;
@@ -13,12 +13,18 @@ use Doctrine\ORM\EntityManager;
 use OC\CoreBundle\Entity\Customer;
 use Symfony\Component\HttpFoundation\Request;
 
-class CustomerFormHandler
+class CustomerPayPalFormHandler
 {
     protected $request;
     protected $em;
-    protected $visitor;
+    protected $customer;
 
+    /**
+     * CustomerPayPalFormHandler constructor.
+     * @param Request $request
+     * @param EntityManager $em
+     * @param Customer $customer
+     */
     public function __construct(Request $request, EntityManager $em, Customer $customer)
     {
         $this->request = $request;
@@ -26,27 +32,17 @@ class CustomerFormHandler
         $this->customer = $customer;
     }
 
-    public function process()
+    /**
+     * @param $email
+     * @return bool
+     */
+    public function process($email)
     {
-        if ($this->request->isMethod('post')) {
-
-            $this->onSuccess();
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public function onSuccess()
-    {
-        // Récupération email stripe
-        $this->customer->setEmail($this->request->get('stripeEmail'));
+        $this->customer->setEmail($email);
 
         $this->em->persist($this->customer);
 
         $this->em->flush();
     }
-
-
+    
 }

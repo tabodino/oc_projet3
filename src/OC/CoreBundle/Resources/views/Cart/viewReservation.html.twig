@@ -1,4 +1,4 @@
-{% extends "OCCoreBundle::layoutEmail.html.twig" %}
+{% extends "OCCoreBundle::layout.html.twig" %}
 
 {% block title %}
     Votre réservation - {{ parent() }}
@@ -9,8 +9,9 @@
     <div class="container">
         <div class="row centered">
             <div class="col-lg-8 col-lg-offset-2">
+                <br>
                 <h4>CONFIRMATION DE VOTRE RESERVATION</h4>
-                <p>RESERVATION n° {{ visitor.ticket.codeReservation }}</p>
+                <p>RESERVATION {{ visitor != null ? visitor.ticket.codeReservation : 'NON TROUVEE' }} </p>
             </div>
         </div><!-- row -->
     </div><!-- container -->
@@ -25,7 +26,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title"><img src="bundles/occore/img/logo-2.jpg" alt="logo joconde"> Musée du Louvre<span class="pull-right">Billet n° {{ visitor.ticket.codeReservation }}</span></h4>
+                            <h4 class="panel-title"><img src="{{ asset('bundles/occore/img/logo-2.jpg') }}" alt="logo joconde"> Musée du Louvre<span class="pull-right">Billet n° {{ visitor.ticket.codeReservation }}</span></h4>
                         </div>
                         <div class="panel-body">
                             <p><i class="fa fa-user"></i> Réservation au nom de : {{ visitor.firstname|capitalize }} {{ visitor.lastname|capitalize }}</p>
@@ -38,9 +39,7 @@
                                 {% endif %}
                             </p>
                         </div>
-                        <div class="panel-footer">
-                            <a href="#" class="btn btn-primary "><i class="fa fa-print"></i> Imprimer cette réservation</a>
-                        </div>
+
 
                     </div>
 
@@ -49,9 +48,25 @@
             <div class="row centered">
                 <div class="col-lg-12">
 
-                    <a href="{{ path('oc_core_homepage') }}" class="btn btn-bg btn-default"><i class="fa fa-home"></i> Retour à l'acccueil du site</a>
+                    <a href="{{ path('oc_core_homepage') }}" class="btn btn-bg btn-primary"><i class="fa fa-home"></i> Retour à l'acccueil du site</a>
 
                 </div>
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.6";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+
+                <div class="col-lg-12">
+                    <p>Partagez l'évenement sur les réseaux sociaux !</p>
+
+                    <div class="fb-share-button" data-href="http://localhost/oc_projet3/web/" data-layout="icon" data-mobile-iframe="true"></div>
+                </div>
+
+
 
 
             </div>
@@ -61,7 +76,7 @@
         {% else %}
             <div class="row centered">
                 <div class="col-lg-12">
-                    <h3>Votre panier est vide.</h3>
+                    <h3>Votre code de réservation semble érroné.</h3>
                     <p>Vous avez actuellement aucune réservation pour le musée.</p>
                 </div>
                 <br>
@@ -79,7 +94,4 @@
 
         {% endif %}
     </div>
-{% endblock %}
-
-{% block javascripts %}
 {% endblock %}
