@@ -105,3 +105,36 @@ endroid_qr_code:
     background_color: { r: 255, g: 255, b: 255, a: 0 }
     label: "My label"
     label_font_size: 16
+
+nomaya_social:
+    buttons:
+        facebook:
+            url:            null
+            locale:         "fr_FR"
+            send:           false
+            width:          300
+            showFaces:      false
+            layout:         "button"
+        twitter:
+            url:            null
+            locale:         "fr"
+            message:        "J'ai réservé mes billets pour le musée du Louvre!"
+            text:           "Tweet"
+            via:            "Musée du Louvre"
+            tag:            "ttot"
+        googleplus:
+            url:            null
+            locale :        "fr"
+            size :          "medium"
+            annotation :    "bubble"
+            width :         300
+        linkedin:
+            url:            null
+            locale:         "fr_FR"
+            counter:        "right"
+        pinterest:
+            url:            null
+    links:
+        facebook:           "http://www.facebook.com/"
+        googleplus:         "https://plus.google.com/"
+    theme:                  'default' # optional

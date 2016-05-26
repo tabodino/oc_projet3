@@ -33,7 +33,6 @@ class VisitorFormHandler
     {
         $this->form->handleRequest($this->request);
 
-
         if ($this->request->isMethod('post') && $this->form->isValid()) {
             $this->onSuccess();
 
@@ -44,11 +43,8 @@ class VisitorFormHandler
     }
 
     // Méthode pour récupérer le tarif du visiteur
-    public function getAge($birthday)
+    public function getPriceByAge($age)
     {
-
-        $ageCalc = new AgeCalculator();
-        $age = $ageCalc->getAge($birthday);
         $price = $this->em->getRepository('OCCoreBundle:Price')->getPriceByAge($age);
 
         return $price;
@@ -59,14 +55,28 @@ class VisitorFormHandler
     protected function onSuccess()
     {
         $this->visitor = $this->form->getData();
+
+        $birthday = $this->visitor->getBirthday()->format('Y-m-d');
+
+        $ageCalc = new AgeCalculator();
+
+        $age = $ageCalc->getAge($birthday);
+
         // Vérifie si le tarif est réduit
         if ($this->visitor->getTicket()->isReduced()) {
 
-            $this->visitor->setPrice($this->getreducedPrice());
-        }else {
-            $birthday = $this->visitor->getBirthday()->format('Y-m-d');
+            // Pas de tarif réduit pour les moins de 12 ans.
+            if ($age < 12) {
+                // Applique le tarif enfant
+                $this->visitor->setPrice($this->getPriceByAge($age));
+            }else
+                // Applique le tarif réduit
+                $this->visitor->setPrice($this->getReducedPrice());
 
-            $this->visitor->setPrice($this->getAge($birthday));
+
+        }else {
+
+            $this->visitor->setPrice($this->getPriceByAge($age));
         }
 
         $this->em->persist($this->visitor);
@@ -74,7 +84,7 @@ class VisitorFormHandler
         $this->em->flush();
     }
 
-    public function getreducedPrice()
+    public function getReducedPrice()
     {
         return $this->em->getRepository('OCCoreBundle:Price')->getReducedPrice('reduit');
     }

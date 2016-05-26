@@ -5,6 +5,7 @@ namespace OC\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\RangeValidator;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 
 /**
@@ -41,6 +42,7 @@ class Ticket
      *     max = "now",
      *
      * )
+     *
      */
     protected $dateReservation;
 
@@ -168,6 +170,33 @@ class Ticket
     public function setReduced($reduced)
     {
         $this->reduced = $reduced;
+    }
+
+    /**
+     * @Assert\IsTrue(message="Le musée est fermé le mardi.")
+     */
+    public function isDateReservationLegal()
+    {
+        $date = $this->dateReservation;
+        $date->format('w');
+        if ($date != 2) {
+            return $this->dateReservation;
+        }
+        return false;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function isFullDay(ExecutionContextInterface $context)
+    {
+        if ($this->getFullDay() == 0) {
+            $context
+                ->buildViolation('COntenu invlalide')
+                ->atPath('fullDay')
+                ->addViolation()
+            ;
+        }
     }
 
 

@@ -71,6 +71,7 @@ class VisitorRepository extends EntityRepository
         ;
     }
 
+    // Méthode pour retouver un réservation via son code (QR-code)
     public function getVisitorByCodeReservation($codeReservation)
     {
         $qb = $this->createQueryBuilder('v')
@@ -86,6 +87,21 @@ class VisitorRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    // Méthode pour compter le nombre de visiteur par rapport à une date
+    public function countVisitorByDateReservation($dateReservation)
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->select('COUNT(v)')
+            ->join('v.ticket', 't')
+            ->where('v.ticket = t.id')
+            ->andWhere('t.dateReservation = :dateReservation')
+            ->setParameter('dateReservation', $dateReservation)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+
     }
 
 }

@@ -24,3 +24,10 @@ services:
     oc_core_reservation_email:
         class: OC\CoreBundle\Services\Mailer
         arguments: ["@mailer", "@templating", "@oc_core_pdf_generator"]
+
+    # Contrainte validation nombre d'entrées / jour
+    oc_core_validator.max_entry:
+        class: OC\CoreBundle\Validator\Constraints\MaxEntryByDayValidator
+        arguments: ["@doctrine.orm.default_entity_manager"]
+        tags:
+            - { name: validator.constraint_validator, alias: oc_core_max_entry }
