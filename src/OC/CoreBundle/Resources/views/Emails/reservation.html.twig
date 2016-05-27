@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8">
 </head>
-<body>
-<style type="text/css">
-    table{margin: 0 auto; text-align:center; cellspacing:0; width:100%;}
-</style>
-    <table>
+<body style="magrin: 0 auto; text-align: center;">
+
+    <table style="margin: 0 auto; text-align:center; max-width:700px; padding: 0; border-collapse: collapse;
+        border-spacing: 0;">
         <tr>
             <td><h1>Votre réservation pour le musée du Louvre</h1></td>
         </tr>
@@ -37,7 +36,13 @@
             </tr>
 
             <tr>
-                <td>Billet valable le : {{ visitor.ticket.dateReservation|date('d/m/Y') }}</td>
+                <td>Billet valable le : {{ visitor.ticket.dateReservation|date('d/m/Y') }}
+                    {%  if visitor.ticket.fullDay == 0 %}
+                        à partir de 14h00
+                    {% else %}
+                        toute la journée
+                    {% endif %}
+                </td>
             </tr>
 
             <tr>

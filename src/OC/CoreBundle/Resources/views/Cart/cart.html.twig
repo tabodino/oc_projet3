@@ -65,12 +65,7 @@
                 {% if total != 0 %}
                     <div class="col-lg-6">
 
-                        <form action='{{ path('oc_core_paypal') }}' METHOD='POST'>
-                           <!-- <input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal'/>-->
-                            <button type="submit" class="btn btn-info pull-left"><strong>Régler via PayPal</strong></button>
-                            <input type="hidden" name="amount" value="{{ total }}">
-                            <input type="hidden" name="currency_code" value="EUR">
-                        </form>
+                        <a data-toggle="modal" data-target="#paypalModal" href="#paypalModal" class="btn btn-info pull-left">Régler via Paypal</a>
 
                         <form action="{{ path('oc_core_cart_validated') }}" method="POST">
                           <script
@@ -87,6 +82,7 @@
 
                           </script>
                         </form>
+
                     </div>
                 {% else %}
                     <div class="col-lg-6"><strong>Les enfants de moins de 12 ans doivent être accompagnés par un adulte.</strong></div>
@@ -118,4 +114,39 @@
 
         {% endif %}
     </div>
+
+
+    <!-- MODAL FOR PAYPAL -->
+    <!-- Modal -->
+    <div class="modal fade" id="paypalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Paiement via PAYPAL</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row centered">
+                        <form action='{{ path('oc_core_paypal') }}' METHOD='POST'>
+                            <div class="form-group">
+                                <label class="control-label required">Renseignez une adresse email valide pour la réception de vos billets</label>
+                                <input class="form-control" type="email" name="email" value="" placeholder="Votre email" required="required">
+                            </div>
+                            <br>
+                            <!-- <input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal'/>-->
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info"><strong>Régler via PayPal</strong></button>
+                                <input type="hidden" name="amount" value="{{ total }}">
+                                <input type="hidden" name="currency_code" value="EUR">
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 {% endblock %}

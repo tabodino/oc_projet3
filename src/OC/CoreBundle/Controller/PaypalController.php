@@ -19,6 +19,13 @@ class PaypalController extends Controller
     // Redirection api paiement Paypal
     public function setExpressCheckoutAction(Request $request)
     {
+        // Service session panier
+        $cart = $this->get('oc_core_cart.session')->cartSession();
+        // Récupération email client
+        $cart['email'] = $request->get('email');
+        // Ajout email client à la session
+        $this->get('oc_core_cart.session')->getSession()->set('cart', $cart);
+
         $paypal = new Paypal();
 
         $params = array(
@@ -30,16 +37,16 @@ class PaypalController extends Controller
         $response = $paypal->request('SetExpressCheckout', $params);
         if ($response) {
 
-            $paypal = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='.$response['TOKEN'];
+            $paypal = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=' . $response['TOKEN'];
 
             return $this->redirect($paypal);
 
-        }else {
+        } else {
 
             return $this->render('OCCoreBundle:Paypal:errorPaypal.html.twig');
         }
     }
-    
+
     // Transaction paypal
     public function getExpressCheckoutDetailsAction(Request $request)
     {
@@ -52,23 +59,21 @@ class PaypalController extends Controller
         ));
 
         if ($response) {
-            $cart['email'] = $response['EMAIL'];
-            // Ajout email client à la session
-            $this->get('oc_core_cart.session')->getSession()->set('cart', $cart);
 
             return $this->doExpressCheckoutPaymentAction($response);
 
-        }else {
+        } else {
 
             return $this->render('OCCoreBundle:Paypal:errorPaypal.html.twig');
         }
     }
 
-   public function errorPaymentAction()
+    // Page erreur pour les paiements
+    public function errorPaymentAction()
     {
         return $this->render('OCCoreBundle:Paypal:errorPaypal.html.twig');
     }
-    
+
     // Confirmation paiement paypal
     public function doExpressCheckoutPaymentAction($response)
     {
@@ -82,7 +87,7 @@ class PaypalController extends Controller
 
         if ($resp) {
             return $this->redirectToRoute('oc_core_paypal_validated');
-        }else {
+        } else {
             return $this->render('OCCoreBundle:Paypal:errorPaypal.html.twig');
         }
     }
@@ -92,14 +97,12 @@ class PaypalController extends Controller
         $customer = new Customer();
         // Service session panier
         $cart = $this->get('oc_core_cart.session')->cartSession();
-        // Modifie l'adresse email pour test envoi reservation (uniquement pour les tests)
-        $testEmail = str_replace("-buyer","" , $cart['email']);
-
+        
         // Instance du form handler client stripe
         $formHandler = new CustomerPayPalFormHandler($request, $this->getDoctrine()->getManager(), $customer);
 
         // Procédure si formulaire validé
-        $formHandler->process($testEmail);
+        $formHandler->process($cart['email']);
         // Récupère les visiteurs correspondant au client
         $visitors = $this->get('oc_core_visitor.manager')->setVisitorByCustomerId($customer->getId(), $cart);
         // Envoi email confirmation
