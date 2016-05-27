@@ -36,7 +36,7 @@ class CartController extends Controller
     {
         // Service session panier
         $cart = $this->get('oc_core_cart.session')->cartSession();
-
+        
         // Définie la quantité à 1
         $cart[$id] = 1;
 

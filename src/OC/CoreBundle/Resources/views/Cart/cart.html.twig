@@ -3,6 +3,7 @@
 {# Variable pour le total de la commande #}
 {% set total = 0 %}
 
+
 {% block title %}
     Votre panier - {{ parent() }}
 {% endblock %}
@@ -23,8 +24,6 @@
         {% if reservations !=null %}
         <div class="row">
             <h3 class="text-center">Récapitulatif de votre commande</h3><br>
-
-
 
                 {% for reservation in reservations %}
                     <div class="panel panel-primary">
@@ -48,8 +47,8 @@
 
                     </div>
                     {% set total = total + reservation.price.price %}
-                {% endfor %}
 
+                {% endfor %}
 
 
             <div class="panel panel-default">
@@ -57,9 +56,6 @@
                     <h4 class="panel-title"><strong>Montant total de votre commande : <span class="pull-right">{{ total|number_format(2) }} €</span> </strong></h4>
                 </div>
             </div>
-
-
-
 
         </div>
         <div class="row centered">

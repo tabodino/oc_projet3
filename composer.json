@@ -30,8 +30,8 @@
         "scribe/stripe-bundle": "dev-master",
         "ensepar/html2pdf-bundle": "~2.0",
         "endroid/qrcode-bundle": "dev-master",
-        "nomaya/social-bundle": "dev-master"
-
+        "nomaya/social-bundle": "dev-master",
+        "phpunit/phpunit": "^5.3"
 
     },
     "require-dev": {
@@ -58,7 +58,7 @@
     },
     "config": {
         "platform": {
-            "php": "5.5.9"
+            "php": "7.0"
         }
     },
     "extra": {
