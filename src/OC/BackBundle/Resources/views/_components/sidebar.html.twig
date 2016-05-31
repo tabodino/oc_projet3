@@ -1,0 +1,81 @@
+<aside id="sidebar">
+
+    <!--| MAIN MENU |-->
+    <ul class="side-menu">
+        <li class="sm-sub sms-profile">
+            <a class="clearfix" href="">
+                <img src="{{ asset('bundles/occore/img/pic.jpg') }}" alt="profil pic">
+
+                        <span class="f-11">
+                            <span class="d-block">nom utilisateur</span>
+                            <small class="text-lowercase">Administrateur</small>
+                        </span>
+            </a>
+
+            <ul>
+                <li><a href="">View Profile</a></li>
+                <li><a href="">Privacy Settings</a></li>
+                <li><a href="">Settings</a></li>
+                <li><a href="">Logout</a></li>
+            </ul>
+        </li>
+
+        <li class="active">
+            <a href="#">
+                <i class="zmdi zmdi-home"></i>
+                <span>Accueil</span>
+            </a>
+        </li>
+        <li class="sm-sub">
+            <a href="">
+                <i class="zmdi zmdi-money-box"></i>
+                <span>Tarifs</span>
+            </a>
+            <ul>
+                <li><a href="colors.html">Consulter les tarifs</a></li>
+                <li><a href="animations.html">Ajouter un tarif</a></li>
+                <li><a href="buttons.html">Modifier un tarif</a></li>
+                <li><a href="icons.html">Supprimer un tarif</a></li>
+            </ul>
+        </li>
+
+        <li class="sm-sub">
+            <a href="">
+                <i class="zmdi zmdi-account"></i>
+                <span>Utilisateurs</span>
+            </a>
+            <ul>
+                <li><a href="colors.html">Mon profil</a></li>
+                <li><a href="animations.html">Ajouter un utilisateur</a></li>
+                <li><a href="buttons.html">Modifier un utilisateur</a></li>
+                <li><a href="icons.html">Supprimer un utilisateur</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="charts.html">
+                <i class="zmdi zmdi-trending-up"></i>
+                <span>Statistiques</span>
+            </a>
+        </li>
+        <li>
+            <a href="calendar.html">
+                <i class="zmdi zmdi-calendar"></i>
+                <span>Calendrier <span class="label label-primary">12</span></span>
+            </a>
+        </li>
+        <li>
+            <a href="calendar.html">
+                <i class="zmdi zmdi-help"></i>
+                <span>Aide</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('fos_user_security_logout') }}">
+                <i class="zmdi zmdi-power-off"></i>
+                <span>Déconnexion</span>
+            </a>
+        </li>
+
+
+    </ul>
+</aside>

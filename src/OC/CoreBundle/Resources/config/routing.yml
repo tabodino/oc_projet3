@@ -36,12 +36,7 @@ oc_core_cart_view_reservation:
     defaults: { _controller: OCCoreBundle:Cart:viewReservation }
 
 
-oc_core_cart_test:
-    path:     /test
-    defaults: { _controller: OCCoreBundle:Cart:test }
-
-
-#paypal test
+#paypal routing
 oc_core_paypal:
     path: /paypal
     defaults: { _controller: OCCoreBundle:Paypal:setExpressCheckout }

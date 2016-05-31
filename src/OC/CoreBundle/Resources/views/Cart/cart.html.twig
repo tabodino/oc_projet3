@@ -2,6 +2,16 @@
 
 {# Variable pour le total de la commande #}
 {% set total = 0 %}
+{# Variable pour le nombre de tarif normal #}
+{% set nbTarifNormal = 0 %}
+{# Variable pour le nombre de tarif enfant #}
+{% set nbTarifEnfant = 0 %}
+{# Variable pour le nom de famille #}
+{% set refLastname = "" %}
+{# Variable pour le nombre méme nom de famille #}
+{% set nbSameName = 0 %}
+{# Variable affichage tarif famille #}
+{% set family=null %}
 
 
 {% block title %}
@@ -9,6 +19,7 @@
 {% endblock %}
 
 {% block body %}
+
     <div id="blue">
         <div class="container">
             <div class="row centered">
@@ -31,8 +42,8 @@
                             <h4 class="panel-title">Réservation n° {{ reservation.ticket.codeReservation }}<span class="pull-right">{{ reservation.price.price}} €</span></h4>
                         </div>
                         <div class="panel-body">
-                            <p><i class="fa fa-user"></i> Réservation au nom de : {{ reservation.firstname|capitalize }} {{ reservation.lastname|capitalize }}</p>
-                            <p><i class="fa fa-money"></i> Tarif : {{ reservation.price.category}}</p>
+                            <p><i class="fa fa-user"></i> Réservation au nom de : {{ reservation.firstname|capitalize }} <span class="lastname">{{ reservation.lastname|capitalize }}</span></p>
+                            <p><i class="fa fa-money"></i> Tarif : <span class="tarif">{{ reservation.price.category}}</span></p>
                             <p><i class="fa fa-ticket"></i> Billet valable le : {{ reservation.ticket.dateReservation|date('d/m/Y') }}
                                 {%  if reservation.ticket.fullDay == 0 %}
                                     à partir de 14h00
@@ -45,15 +56,39 @@
                             <a href="{{ path('oc_core_cart_remove', { 'id': reservation.id }) }}" class="btn btn-danger "><i class="fa fa-trash-o"></i> Supprimer cette réservation</a>
                         </div>
 
+                        {% if loop.first %}
+
+                            {% set refLastname =  reservation.lastname|capitalize  %}
+                        {% endif %}
+
+                        {% if (refLastname == reservation.lastname|capitalize) %}
+                            {% set nbSameName = nbSameName+1 %}
+                        {% endif %}
+
+                        {% if (reservation.price.category == "normal") %}
+                            {% set nbTarifNormal = nbTarifNormal+1 %}
+                        {% endif %}
+
+                        {% if (reservation.price.category == "enfant") %}
+                            {% set nbTarifEnfant= nbTarifEnfant+1 %}
+                        {% endif %}
+
+
                     </div>
+
+
                     {% set total = total + reservation.price.price %}
 
                 {% endfor %}
+                    {% if nbTarifNormal == 2 and nbTarifEnfant == 2 and nbSameName == 4 %}
+                        {% set total = 35 %}
+                        {% set family = "Tarif famille " %}
+                    {% endif %}
 
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><strong>Montant total de votre commande : <span class="pull-right">{{ total|number_format(2) }} €</span> </strong></h4>
+                    <h4 class="panel-title"><strong>Montant total de votre commande : <span class="pull-right">{{(family !=null) ? family : '' }}{{ total|number_format(2) }} €</span> </strong></h4>
                 </div>
             </div>
 
@@ -149,4 +184,9 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+
+
+
+
 {% endblock %}

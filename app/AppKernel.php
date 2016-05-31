@@ -22,7 +22,8 @@ class AppKernel extends Kernel
             new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
             new Endroid\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
-
+            new OC\BackBundle\OCBackBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
