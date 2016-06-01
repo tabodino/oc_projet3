@@ -1,10 +1,42 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "OCBackBundle::layout.html.twig" %}
 
-{% block body %}
-    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
-    {{ form_end(form) }}
-{% endblock body %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+
+    <section id="content">
+        <div class="container">
+
+            <header class="page-header">
+                <h3><a href="{{ path('oc_back_homepage') }}">Accueil</a> / Ajout Utilisateur</h3>
+            </header>
+
+            <div class="row">
+                <div class="col-sm-8 col-lg-offset-2">
+                    <div class="tile">
+                        <div class="t-header">
+                            <div class="th-title">Ajouter un utilisateur</div>
+                        </div>
+                        <div class="t-body">
+                            <div style="padding:5%;">
+                                {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+                                {{ form_widget(form) }}
+                                <br>
+                                <div>
+                                    <input type="submit" class="btn btn-success" value="{{ 'registration.submit'|trans }}" />
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </section>
+
+{% endblock content %}

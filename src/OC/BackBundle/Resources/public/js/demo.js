@@ -48,7 +48,7 @@ $(document).ready(function(){
     /* --------------------------------------------------------
         Welcome Message
     -----------------------------------------------------------*/
-    notify('top', 'right', '', 'inverse', 'animated fadeIn', 'animated fadeOut', 'Welcome back ', 'Mallinda Hollaway!');
+   // notify('top', 'right', '', 'inverse', 'animated fadeIn', 'animated fadeOut', 'Welcome back ', 'Mallinda Hollaway!');
     
     /* --------------------------------------------------------
         Animations
@@ -126,21 +126,24 @@ $(document).ready(function(){
     
     //Parameter
     $('#sa-params').click(function(){
-        swal({   
-            title: "Are you sure?",   
-            text: "You will not be able to recover this imaginary file!",   
+        var href= $(this).attr('href');
+        alert(href);
+        swal({
+            title: "Etes-vous sûr ?",
+            text: "Cette action est irreversible",
             type: "warning",   
             showCancelButton: true,   
             confirmButtonColor: "#DD6B55",   
-            confirmButtonText: "Yes, delete it!",   
-            cancelButtonText: "No, cancel plx!",   
+            confirmButtonText: "Confirmer",
+            cancelButtonText: "Annuler",
             closeOnConfirm: false,   
             closeOnCancel: false 
         }, function(isConfirm){   
             if (isConfirm) {     
-                swal("Deleted!", "Your imaginary file has been deleted.", "success");   
-            } else {     
-                swal("Cancelled", "Your imaginary file is safe :)", "error");   
+                swal("Supprimé!", "L'utilisateur a été supprimé.", "success");
+                location.href = href;
+            } else {
+                swal("Annulé", "Aucune donnée supprimée.", "error");
             } 
         });
     });
@@ -163,6 +166,29 @@ $(document).ready(function(){
            showConfirmButton: false 
        });
    });
+
+    $('.sa-delete').click(function(){
+        var href= $(this).attr('href');
+        
+        swal({
+            title: "Etes-vous sûr ?",
+            text: "Cette action est irreversible",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Confirmer",
+            cancelButtonText: "Annuler",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function(isConfirm){
+            if (isConfirm) {
+                swal("Supprimé!", "L'utilisateur a été supprimé.", "success");
+                location.href = href;
+            } else {
+                swal("Annulé", "Aucune donnée supprimée.", "error");
+            }
+        });
+    });
     
     
     /* --------------------------------------------------------

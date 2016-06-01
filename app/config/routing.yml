@@ -7,8 +7,45 @@ EndroidQrCodeBundle:
     type:     annotation
     prefix:   /qrcode
 
+oc_back:
+    resource: "@OCBackBundle/Controller/"
+    prefix:   /admin
+
+oc_back_homepage:
+    path:     /admin/
+    defaults: { _controller: OCBackBundle:Admin:index }
+
+oc_back_profile:
+    path:     /admin/profil/
+    defaults: { _controller: OCBackBundle:Admin:profile }
+    methods: [GET, POST]
+
+oc_back_users:
+    path:     /admin/utilisateurs/
+    defaults: { _controller: OCBackBundle:Admin:users }
+    methods: [GET]
+
+oc_back_delete_user:
+    path:     /admin/utilisateurs/supprime/{username}
+    defaults: { _controller: OCBackBundle:Admin:deleteUser }
+    methods: [GET, POST]
+
+
+fos_user_profile_show:
+    path: /admin/profil
+
+fos_user_change_password:
+    path: /admin/profil
+    defaults: { _controller:FOSUserBundle:ChangePassword:changePassword }
+    methods: [GET, POST]
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_registration_register:
+    path:      /admin/utilisateur/ajout
+    defaults:  { _controller: FOSUserBundle:Registration:register }
+    methods: [GET, POST]
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

@@ -444,6 +444,7 @@ $(document).ready(function(){
             $('.ms-menu').toggleClass('toggled'); 
         });
     }
+    
 });
 
 /* --------------------------------------------------------

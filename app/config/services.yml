@@ -4,6 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    form_success_listener:
+        class: OC\BackBundle\EventListener\FormSuccessListener
+        arguments: ["@router"]
+        tags:
+            - { name: kernel.event_subscriber }
