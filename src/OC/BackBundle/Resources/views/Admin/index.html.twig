@@ -11,117 +11,57 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="o-item bg-cyan">
                         <div class="oi-title">
-                            <span data-value="450382"></span>
-                            <span>Trafic du site</span>
+                            <span>Réservations journalières</span>
+                        </div>
+                        <div class="cb-item bg-cyan">
+                            <h3>{{ nbDailyVisitor }}</h3>
                         </div>
 
-                        <div class="overview-chart-line text-center"><!-- 9,5,6,3,9,7,5,4,6,5,6,4,9 --></div>
                     </div>
+
                 </div>
 
                 <div class="col-md-3 col-sm-6">
                     <div class="o-item bg-amber">
                         <div class="oi-title">
-                            <span data-value="8737"></span>
-                            <span>Total des ventes</span>
+                            <span>Réservations semaine dernière</span>
+                        </div>
+                        <div class="cb-item bg-amber">
+                            <h3>{{ nbWeeklyVisitor }}</h3>
                         </div>
 
-                        <div class="overview-chart-line text-center"><!-- 2,4,6,5,6,4,5,3,7,3,6,5,9,6 --></div>
                     </div>
                 </div>
 
                 <div class="col-md-3 col-sm-6">
                     <div class="o-item bg-green">
                         <div class="oi-title">
-                            <span data-value="450382"></span>
-                            <span>Nombres de réservations</span>
+                            <span>Réservations mensuelles</span>
+                        </div>
+                        <div class="cb-item bg-green">
+                            <h3>{{ nbMontlyVisitor }}</h3>
                         </div>
 
-                        <div class="overview-chart-line text-center"><!-- 9,4,6,5,6,4,5,7,9,3,6,5,9 --></div>
+
                     </div>
                 </div>
 
                 <div class="col-md-3 col-sm-6">
                     <div class="o-item bg-bluegray">
                         <div class="oi-title">
-                            <span data-value="452"></span>
-                            <span>Support Tickets</span>
+                            <span>Réservations totales</span>
+                        </div>
+                        <div class="cb-item bg-bluegray">
+                            <h3>{{ nbTotalVisitor }}</h3>
                         </div>
 
-                        <div class="overview-chart-line text-center"><!-- 6,9,5,6,3,7,5,4,6,5,6,4,2 --></div>
                     </div>
                 </div>
             </div>
 
+
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="tile">
-                        <div class="t-header th-alt bg-teal">
-                            <div class="th-title">Server Statistics</div>
-
-                            <div class="actions dropdown">
-                                <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more"></i></a>
-
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="">Refresh</a></li>
-                                    <li><a href="">Settings</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                        <div class="t-body">
-                            <div class="main-chart p-t-25">
-                                <div id="curved-line-chart" class="mc-item"></div>
-                                <div class="mc-info hidden-xs">
-                                    <span>1342 <i class="zmdi zmdi-caret-up-circle"></i></span>
-                                    <small>Praesent tempor erat eget risus vehicula in maximus turpis</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tile bg-cyan">
-                        <div class="t-header th-alt bg-black-trp">
-                            <div class="th-title">Percentages</div>
-
-                            <div class="actions dropdown">
-                                <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more"></i></a>
-
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="">Refresh</a></li>
-                                    <li><a href="">Settings</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="t-body tb-padding text-center">
-                            <div class="pie-overviews">
-
-                                <div class="pie-chart-tiny po-item" data-percent="86">
-                                    <span class="poi-percent">86</span>
-                                    <div class="poi-title">New Visitors</div>
-                                </div>
-
-                                <div class="pie-chart-tiny po-item" data-percent="23">
-                                    <span class="poi-percent">23</span>
-                                    <div class="poi-title">Bounce Rate</div>
-                                </div>
-
-                                <div class="pie-chart-tiny po-item" data-percent="57">
-                                    <span class="poi-percent">57</span>
-                                    <div class="poi-title">Emails Sent</div>
-                                </div>
-
-                                <div class="pie-chart-tiny po-item" data-percent="34">
-                                    <span class="poi-percent">34</span>
-                                    <div class="poi-title">Sales Rate</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
+                <div class="col-sm-12">
 
                     <!-- Calendar -->
                     <div class="tile">
@@ -129,127 +69,44 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6">
 
-                    <!-- Site Visitors -->
-                    <div class="tile">
-                        <div class="t-header th-alt bg-blue">
-                            <div class="th-title">Site Visitors</div>
-
-                            <div class="actions dropdown">
-                                <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more"></i></a>
-
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="">Refresh</a></li>
-                                    <li><a href="">Settings</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="tile-body">
-                            <div class="bg-blue count-box">
-                                <div class="row">
-                                    <div class="col-sm-3 col-xs-6">
-                                        <div class="cb-item">
-                                            <h3>298K</h3>
-                                            <small>This Month</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-xs-6">
-                                        <div class="cb-item">
-                                            <h3>87K</h3>
-                                            <small>This Week</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-xs-6">
-                                        <div class="cb-item">
-                                            <h3>12967</h3>
-                                            <small>Today</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-xs-6">
-                                        <div class="cb-item">
-                                            <h3>4872K</h3>
-                                            <small>Total Visits</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="p-20 main-chart">
-                                <div id="bar-chart" class="mc-item"></div>
-                                <div class="flot-legend"></div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-
-
-
-
-
-                    <div class="tile">
-                        <div class="t-header">
-                            <div class="th-title">Dialog <small>A beautiful replacement for Javascript's boring Alert</small></div>
-                        </div>
-
-                        <div class="t-body tb-padding">
-                            <div class="row dialog">
-                                <div class="col-sm-3">
-                                    <p class="f-500 c-black m-b-20">Basic Example</p>
-
-                                    <button class="btn btn-info btn-block" id="sa-basic">Click me</button>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <p class="f-500 c-black m-b-20">A title with a text under</p>
-
-                                    <button class="btn btn-info btn-block" id="sa-title">Click me</button>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <p class="f-500 c-black m-b-20">A success message!</p>
-
-                                    <button class="btn btn-info btn-block" id="sa-success">Click me</button>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <p class="f-500 c-black m-b-20">A warning message</p>
-
-                                    <button class="btn btn-info btn-block" id="sa-warning">Click me</button>
-                                </div>
-                            </div>
-
-                            <br/><br/>
-
-                            <div class="row dialog">
-                                <div class="col-sm-3">
-                                    <p class="f-500 c-black m-b-20">By passing a parameter, you can execute something else for "Cancel".</p>
-
-                                    <button class="btn btn-info btn-block" id="sa-params">Click me</button>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <p class="f-500 c-black m-b-20">A message with custom Image Header</p>
-
-                                    <button class="btn btn-info btn-block" id="sa-image">Click me</button>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <p class="f-500 c-black m-b-20">A message with auto close timer</p>
-
-                                    <button class="btn btn-info btn-block" id="sa-close">Click me</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
             </div>
         </div>
     </section>
+
 {% endblock %}
+
+{% block custom_script %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if($('.calendar-widget')[0]) {
+                (function(){
+                    $('.calendar-widget').fullCalendar({
+                        contentHeight: 'auto',
+                        theme: true,
+                        header: {
+                            right: '',
+                            center: 'prev, title, next',
+                            left: ''
+                        },
+                        defaultDate: '{{ "now"|date('Y-m-d') }}',
+                        editable: false,
+                        events: [
+                            {% for ticket in nbTicketByDay %}
+
+                            {
+                                title: '{{ ticket.1 }}',
+                                start: '{{ ticket.dateReservation|date('Y-m-d') }}',
+
+                            },
+                        {% endfor %}
+
+                        ]
+                    });
+                })();
+            }
+
+        });
+    </script>
+
+{% endblock custom_script %}

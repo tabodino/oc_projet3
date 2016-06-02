@@ -3,77 +3,14 @@
 
         <!-- Logo -->
         <li class="logo">
-            <a href=""><img src="{{ asset('bundles/occore/img/logo.png') }}"  alt="logo">Admin</a>
+            <a href="{{ path('oc_back_homepage') }}"><img src="{{ asset('bundles/occore/img/logo.png') }}"  alt="logo"> Administration</a>
             <div id="menu-trigger"><i class="zmdi zmdi-menu"></i></div>
         </li>
 
-
-        <!-- Ongoing Projects -->
-        <li class="dropdown">
-            <a data-toggle="dropdown" href="" class="hi-projects">
-                <i class="zmdi zmdi-format-subject"></i>
-            </a>
-            <div class="dropdown-menu hi-dropdown">
-                <div class="dropdown-header bg-red m-b-15">
-                    ONGOING PROJECTS
-                    <ul class="actions a-alt">
-                        <li><a class="" href=""><i class="zmdi zmdi-plus"></i></a></li>
-                    </ul>
-                </div>
-                <div class="list-group lg-alt">
-                    <div class="list-group-item">
-                        <div class="list-group-item-heading m-b-5">HTML5 Validation Report</div>
-
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
-                                <span class="sr-only">95% Complete (success)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="list-group-item-heading m-b-5">Google Chrome Extension</div>
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                <span class="sr-only">80% Complete (success)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="list-group-item-heading m-b-5">Social Intranet Projects</div>
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                <span class="sr-only">20% Complete</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="list-group-item-heading m-b-5">Bootstrap Admin Template</div>
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                <span class="sr-only">60% Complete (warning)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="list-group-item-heading m-b-5">Youtube Client App</div>
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                <span class="sr-only">80% Complete (danger)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a class="view-more" href="">View more</a>
-                </div>
-            </div>
-        </li>
+        <li class="hidden-xs hidden-sm"><h2> Partie administration Musée du Louvre</h2></li>
 
         <!-- Events -->
-        <li class="dropdown hidden-xs">
+        <!--<li class="dropdown hidden-xs">
             <a href="" data-toggle="dropdown" class="hi-events">
                 <i class="zmdi zmdi-calendar"></i>
             </a>
@@ -159,21 +96,8 @@
 
                 <a class="view-more" href="">View more</a>
             </div>
-        </li>
+        </li>-->
 
-
-        <!-- Settings -->
-      {#  <li class="pull-right dropdown hidden-xs">
-            <a href="" data-toggle="dropdown">
-                <i class="zmdi zmdi-more-vert"></i>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a data-toggle="fullscreen" href="">Toggle Fullscreen</a></li>
-                <li><a data-toggle="localStorage" href="">Clear Local Storage</a></li>
-                <li><a href="">Account Settings</a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
-            </ul>
-        </li>#}
 
         <!-- Quick Apps -->
         <li class="hidden-xs dropdown pull-right">
@@ -186,7 +110,7 @@
 
                 <div class="la-body">
                     <div class="lab-item">
-                        <a href="" class="bg-teal">
+                        <a href="{{ path('oc_back_calendar') }}" class="bg-teal">
                             <i class="zmdi zmdi-calendar"></i>
                         </a>
                         <small>Calendrier</small>
@@ -200,7 +124,7 @@
                     </div>
 
                     <div class="lab-item">
-                        <a href="" class="bg-blue">
+                        <a href="{{ path('oc_back_pricelist') }}" class="bg-blue">
                             <i class="zmdi zmdi-money-box"></i>
                         </a>
                         <small>Tarifs</small>
@@ -214,7 +138,7 @@
                     </div>
 
                     <div class="lab-item">
-                        <a href="" class="bg-cyan">
+                        <a href="{{ path('oc_back_help') }}" class="bg-cyan">
                             <i class="zmdi zmdi-help-outline"></i>
                         </a>
                         <small>Aide</small>

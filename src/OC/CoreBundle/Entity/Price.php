@@ -3,6 +3,7 @@
 namespace OC\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Price
@@ -32,6 +33,7 @@ class Price
      * @var string
      *
      * @ORM\Column(name="price", type="decimal", precision=5, scale=2)
+     * @Assert\Range(min=0)
      */
     protected $price;
 

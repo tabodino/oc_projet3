@@ -30,6 +30,23 @@ oc_back_delete_user:
     defaults: { _controller: OCBackBundle:Admin:deleteUser }
     methods: [GET, POST]
 
+oc_back_pricelist:
+    path: /admin/tarifs
+    defaults: { _controller: OCBackBundle:Admin:pricelist }
+
+oc_back_edit_price:
+    path: /admin/tarifs/change
+    defaults: { _controller: OCBackBundle:Admin:editPrice }
+    methods: [POST]
+
+oc_back_calendar:
+    path: /admin/calendrier
+    defaults: { _controller: OCBackBundle:Admin:calendar }
+
+oc_back_help:
+    path: /admin/aide
+    defaults: { _controller: OCBackBundle:Admin:help }
+
 
 fos_user_profile_show:
     path: /admin/profil

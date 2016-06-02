@@ -9,7 +9,11 @@
 namespace OC\BackBundle\Controller;
 
 use OC\BackBundle\Entity\User;
+use OC\CoreBundle\Entity\Price;
+use OC\CoreBundle\Form\Handler\PriceFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdminController extends Controller
@@ -17,7 +21,21 @@ class AdminController extends Controller
     // Page accueil administration
     public function indexAction()
     {
-        return $this->render('OCBackBundle:Admin:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $nbTotalVisitor = $em->getRepository('OCCoreBundle:Visitor')->countTotalVisitors();
+        $nbMontlyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countMonthlyVisitors();
+        $nbWeeklyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countWeeklyVisitors();
+        $nbDailyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countDailyVisitors();
+        $nbTicketByDay = $em->getRepository('OCCoreBundle:Ticket')->countAllTicketByDay();
+
+        return $this->render('OCBackBundle:Admin:index.html.twig', array(
+            'nbTotalVisitor' => $nbTotalVisitor,
+            'nbMontlyVisitor' => $nbMontlyVisitor,
+            'nbWeeklyVisitor' => $nbWeeklyVisitor,
+            'nbDailyVisitor' => $nbDailyVisitor,
+            'nbTicketByDay' => $nbTicketByDay,
+
+        ));
     }
 
     // Page profil
@@ -39,11 +57,6 @@ class AdminController extends Controller
     }
 
 
-   /* public function addUserAction()
-    {
-        return $this->render('OCBackBundle:Admin:addUser.html.twig');
-    }*/
-
     public function deleteUserAction($username)
     {
         $manager = $this->get('fos_user.user_manager');
@@ -62,4 +75,33 @@ class AdminController extends Controller
 
     }
 
+    public function pricelistAction()
+    {
+        // Récupération du manager d'entité price
+        $prices = $this->get('oc_core_price.manager')->getAll();
+
+        return $this->render('OCBackBundle:Admin:pricelist.html.twig', array('prices' => $prices));
+    }
+
+    public function editPriceAction(Request $request)
+    {
+
+        $formHandler = new PriceFormHandler($request, $this->getDoctrine()->getManager());
+        $formHandler->process();
+
+        return $this->redirectToRoute('oc_back_pricelist');
+    }
+
+    public function calendarAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $nbTicketByDay = $em->getRepository('OCCoreBundle:Ticket')->countAllTicketByDay();
+
+        return $this->render('OCBackBundle:Admin:calendar.html.twig', array('nbTicketByDay' => $nbTicketByDay));
+    }
+
+    public function helpAction()
+    {
+        return $this->render('OCBackBundle:Admin:help.html.twig');
+    }
 }

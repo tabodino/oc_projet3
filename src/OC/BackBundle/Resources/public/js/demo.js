@@ -165,8 +165,10 @@ $(document).ready(function(){
            timer: 2000,   
            showConfirmButton: false 
        });
-   });
+    });
 
+
+    // Delete user in table
     $('.sa-delete').click(function(){
         var href= $(this).attr('href');
         
@@ -189,12 +191,18 @@ $(document).ready(function(){
             }
         });
     });
+
+    // Show form price edit
+    $('.edit-price').click(function() {
+        $(this).hide();
+        $(this).next('form').show();
+    });
     
     
     /* --------------------------------------------------------
         Calendar Widget
     -----------------------------------------------------------*/
-    if($('.calendar-widget')[0]) {
+   /* if($('.calendar-widget')[0]) {
         (function(){
             $('.calendar-widget').fullCalendar({
 		contentHeight: 'auto',
@@ -253,5 +261,5 @@ $(document).ready(function(){
                 ]
             });
         })();
-    }
+    }*/
 });

@@ -3,6 +3,8 @@
 namespace OC\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints\DateTime;
+
 /**
  * VisitorRepository
  *
@@ -103,5 +105,85 @@ class VisitorRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
 
     }
+
+    // Compte le nombre de reservations totales
+    public function countTotalVisitors()
+    {
+        return $this->createQueryBuilder('v')
+            ->select('COUNT(v)')
+            ->join('v.customer', 'c')
+            ->where('v.customer = c.id')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    // Compte le nombre de reservations mensuelles
+    public function countMonthlyVisitors()
+    {
+        $date = new \DateTime();
+        $month = $date->format('Y-m');
+        $start = $month."-01";
+        $end = $month."-31";
+        
+        $qb = $this->createQueryBuilder('v')
+            ->select('COUNT(v)')
+            ->join('v.customer', 'c')
+            ->join('v.ticket', 't')
+            ->where('v.customer = c.id')
+            ->andWhere('v.ticket = t.id')
+            ->andWhere('t.dateReservation > :start')
+            ->andWhere('t.dateReservation < :end')
+            ->setParameters(array('start' => $start, 'end' =>$end))
+            ->getQuery()
+        ;
+
+        return $qb->getSingleScalarResult();
+    }
+
+    // Compte le nombre de reservations hebdomadaires
+    public function countWeeklyVisitors()
+    {
+        $start = new \DateTime('+1 weeks ago');
+        $end = new \DateTime();
+
+        $qb = $this->createQueryBuilder('v')
+            ->select('COUNT(v)')
+            ->join('v.customer', 'c')
+            ->join('v.ticket', 't')
+            ->where('v.customer = c.id')
+            ->andWhere('v.ticket = t.id')
+            ->andWhere('t.dateReservation >= :start')
+            ->andWhere('t.dateReservation < :end')
+            ->setParameters(array('start' => $start, 'end' =>$end))
+            ->getQuery()
+        ;
+
+        return $qb->getSingleScalarResult();
+    }
+
+    // Compte le nombre de reservations journalières
+    public function countDailyVisitors()
+    {
+        $today = new \DateTime();
+        $day = $today->format('Y-m-d');
+
+        $qb = $this->createQueryBuilder('v')
+            ->select('COUNT(v)')
+            ->join('v.customer', 'c')
+            ->join('v.ticket', 't')
+            ->where('v.customer = c.id')
+            ->andWhere('v.ticket = t.id')
+            ->andWhere('t.dateReservation = :day')
+            ->setParameter('day', $day)
+            ->getQuery()
+        ;
+
+        return $qb->getSingleScalarResult();
+
+    }
+
+
+
+
 
 }

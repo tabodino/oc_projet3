@@ -33,4 +33,5 @@ class PriceRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleResult();
     }
+    
 }
