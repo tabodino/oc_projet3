@@ -26,7 +26,7 @@ class LoadPrice extends AbstractFixture implements FixtureInterface, OrderedFixt
         $id = 0;
         $prices = array();
         // param array(category, price, ageMin, ageMax, condition)
-        $prices[0] = array('petit', 0, 0, 4, null);
+        $prices[0] = array('gratuit', 0, 0, 4, null);
         $prices[1] = array('enfant', 8, 4, 12, null);
         $prices[2] = array('normal', 16, 12, 60, null);
         $prices[3] = array('réduit', 10, null, null, "Sous condition *");

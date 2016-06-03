@@ -31,10 +31,6 @@
                         <!-- START PRICING TABLE -->
                         <div class="pricing-option">
                             <div class="pricing-top">
-                                {% if price.price == 0 %}
-                                    <span class="special-label">GRATUIT</span>
-                                {% endif %}
-
                                 <span class="pricing-edition">{{ price.category|upper }}</span>
                                 <span class="price">
                                     {% if price.price == 0 %}
