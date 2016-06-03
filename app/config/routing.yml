@@ -43,6 +43,10 @@ oc_back_calendar:
     path: /admin/calendrier
     defaults: { _controller: OCBackBundle:Admin:calendar }
 
+oc_back_stats:
+    path: /admin/statistiques
+    defaults: { _controller: OCBackBundle:Admin:stats }
+
 oc_back_help:
     path: /admin/aide
     defaults: { _controller: OCBackBundle:Admin:help }

@@ -182,6 +182,33 @@ class VisitorRepository extends EntityRepository
 
     }
 
+    // Compte le nombre de visiteurs par pays
+    public function countVisitorsByCountry()
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->select('COUNT(v.id) AS myCount, v.country')
+            ->groupBy('v.country')
+            ->addOrderBy('myCount', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function countCategoryTicket()
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->select('COUNT(v.id) AS myCount, p.category')
+            ->join('v.price', 'p')
+            ->where('v.price = p.id')
+            ->groupBy('p.category')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
 
 
 

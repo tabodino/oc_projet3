@@ -27,7 +27,6 @@ class TicketRepository extends EntityRepository
     // Compte le nombre de ticket journalier
     public function countAllTicketByDay()
     {
-
         $qb = $this->createQueryBuilder('t')
             ->select('COUNT(t.id), t.dateReservation')
             ->where('t.dateReservation <= :now')

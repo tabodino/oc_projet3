@@ -23,14 +23,17 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $nbTotalVisitor = $em->getRepository('OCCoreBundle:Visitor')->countTotalVisitors();
-        $nbMontlyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countMonthlyVisitors();
+        $nbMonthlyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countMonthlyVisitors();
         $nbWeeklyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countWeeklyVisitors();
         $nbDailyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countDailyVisitors();
         $nbTicketByDay = $em->getRepository('OCCoreBundle:Ticket')->countAllTicketByDay();
 
+        $countryVisitor = $em->getRepository('OCCoreBundle:Visitor')->countVisitorsByCountry();
+
+
         return $this->render('OCBackBundle:Admin:index.html.twig', array(
             'nbTotalVisitor' => $nbTotalVisitor,
-            'nbMontlyVisitor' => $nbMontlyVisitor,
+            'nbMonthlyVisitor' => $nbMonthlyVisitor,
             'nbWeeklyVisitor' => $nbWeeklyVisitor,
             'nbDailyVisitor' => $nbDailyVisitor,
             'nbTicketByDay' => $nbTicketByDay,
@@ -98,6 +101,27 @@ class AdminController extends Controller
         $nbTicketByDay = $em->getRepository('OCCoreBundle:Ticket')->countAllTicketByDay();
 
         return $this->render('OCBackBundle:Admin:calendar.html.twig', array('nbTicketByDay' => $nbTicketByDay));
+    }
+
+    public function statsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $countryVisitor = $em->getRepository('OCCoreBundle:Visitor')->countVisitorsByCountry();
+        $countPrice = $em->getRepository('OCCoreBundle:Visitor')->countCategoryTicket();
+        $nbTotalVisitor = $em->getRepository('OCCoreBundle:Visitor')->countTotalVisitors();
+        $nbMonthlyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countMonthlyVisitors();
+        $nbWeeklyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countWeeklyVisitors();
+        $nbDailyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countDailyVisitors();
+        
+        return $this->render('OCBackBundle:Admin:stats.html.twig', array(
+            'countryVisitor' => $countryVisitor,
+            'countPrice' => $countPrice,
+            'nbTotalVisitor' => $nbTotalVisitor,
+            'nbMonthlyVisitor' => $nbMonthlyVisitor,
+            'nbWeeklyVisitor' => $nbWeeklyVisitor,
+            'nbDailyVisitor' => $nbDailyVisitor,
+
+        ));
     }
 
     public function helpAction()

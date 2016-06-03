@@ -6,10 +6,10 @@
             <a class="clearfix" href="">
                 <img src="{{ asset('bundles/occore/img/pic.jpg') }}" alt="profil pic">
 
-                        <span class="f-11">
-                            <span class="d-block">{{ app.user }}</span>
-                            <small class="text-lowercase">{{ app.user.email }}</small>
-                        </span>
+                <span class="f-11">
+                    <span class="d-block">{{ app.user }}</span>
+                    <small class="text-lowercase">{{ app.user.email }}</small>
+                </span>
             </a>
 
             <ul>
@@ -44,7 +44,7 @@
             </ul>
         </li>
         <li>
-            <a href="">
+            <a href="{{ path('oc_back_stats') }}">
                 <i class="zmdi zmdi-trending-up"></i>
                 <span>Statistiques</span>
             </a>
