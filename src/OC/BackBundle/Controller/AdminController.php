@@ -21,63 +21,19 @@ class AdminController extends Controller
     // Page accueil administration
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $nbTotalVisitor = $em->getRepository('OCCoreBundle:Visitor')->countTotalVisitors();
-        $nbMonthlyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countMonthlyVisitors();
-        $nbWeeklyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countWeeklyVisitors();
-        $nbDailyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countDailyVisitors();
-        $nbTicketByDay = $em->getRepository('OCCoreBundle:Ticket')->countAllTicketByDay();
-
-        $countryVisitor = $em->getRepository('OCCoreBundle:Visitor')->countVisitorsByCountry();
-
-
+        // Nombre de tickets par jour (calendrier)
+        $nbTicketByDay = $this->get('oc_core_ticket.manager')->countAllTicketByDay();
+        // Stats visiteurs
+        $countVisitors = $this->get('oc_core_visitor.manager')->getVisitorCounter();
+        
         return $this->render('OCBackBundle:Admin:index.html.twig', array(
-            'nbTotalVisitor' => $nbTotalVisitor,
-            'nbMonthlyVisitor' => $nbMonthlyVisitor,
-            'nbWeeklyVisitor' => $nbWeeklyVisitor,
-            'nbDailyVisitor' => $nbDailyVisitor,
+            'countVisitors' => $countVisitors,
             'nbTicketByDay' => $nbTicketByDay,
-
         ));
     }
 
-    // Page profil
-    public function profileAction()
-    {
-        // Surchage template formulaire fosuserbundle
-        $form = $this->get('fos_user.change_password.form.factory')->createForm();
 
-        return $this->render('OCBackBundle:Admin:profile.html.twig', array('form' => $form->createView()));
-    }
-
-    // Page utilisateurs
-    public function usersAction()
-    {
-        // Récupération utilisateurs FOSUserBundle
-        $users = $this->get('fos_user.user_manager')->findUsers();
-
-        return $this->render('OCBackBundle:Admin:users.html.twig', array('users' => $users));
-    }
-
-
-    public function deleteUserAction($username)
-    {
-        $manager = $this->get('fos_user.user_manager');
-
-        $user = $manager->findUserByUsername($username);
-
-        // Tester suppression propre compte
-
-        if (!$user instanceof User) {
-            throw new NotFoundHttpException('User not found. ');
-        }
-
-        $manager->deleteUser($user);
-
-        return $this->redirectToRoute('oc_back_users');
-
-    }
-
+    // Page liste des tarifs
     public function pricelistAction()
     {
         // Récupération du manager d'entité price
@@ -86,44 +42,44 @@ class AdminController extends Controller
         return $this->render('OCBackBundle:Admin:pricelist.html.twig', array('prices' => $prices));
     }
 
+    // Modification tarifs
     public function editPriceAction(Request $request)
     {
-
         $formHandler = new PriceFormHandler($request, $this->getDoctrine()->getManager());
+
         $formHandler->process();
 
         return $this->redirectToRoute('oc_back_pricelist');
     }
 
+    // Page calendrier
     public function calendarAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $nbTicketByDay = $em->getRepository('OCCoreBundle:Ticket')->countAllTicketByDay();
+        // Nombre de tickets par jour (calendrier)
+        $nbTicketByDay = $this->get('oc_core_ticket.manager')->countAllTicketByDay();
 
         return $this->render('OCBackBundle:Admin:calendar.html.twig', array('nbTicketByDay' => $nbTicketByDay));
     }
 
+    // Page Statistiques
     public function statsAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $countryVisitor = $em->getRepository('OCCoreBundle:Visitor')->countVisitorsByCountry();
-        $countPrice = $em->getRepository('OCCoreBundle:Visitor')->countCategoryTicket();
-        $nbTotalVisitor = $em->getRepository('OCCoreBundle:Visitor')->countTotalVisitors();
-        $nbMonthlyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countMonthlyVisitors();
-        $nbWeeklyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countWeeklyVisitors();
-        $nbDailyVisitor = $em->getRepository('OCCoreBundle:Visitor')->countDailyVisitors();
+        // Service Stats visiteurs
+        $countVisitors = $this->get('oc_core_visitor.manager')->getVisitorCounter();
+        // Retourne les 5 nations les plus présentes
+        $countryVisitor = $this->get('oc_core_visitor.manager')->countVisitorsByCountry();
+        // Retourne le nombre de visteurs par categorie de prix
+        $countPrice = $this->get('oc_core_visitor.manager')->countCategoryPrice();
         
         return $this->render('OCBackBundle:Admin:stats.html.twig', array(
             'countryVisitor' => $countryVisitor,
             'countPrice' => $countPrice,
-            'nbTotalVisitor' => $nbTotalVisitor,
-            'nbMonthlyVisitor' => $nbMonthlyVisitor,
-            'nbWeeklyVisitor' => $nbWeeklyVisitor,
-            'nbDailyVisitor' => $nbDailyVisitor,
+            'countVisitors' => $countVisitors,
 
         ));
     }
 
+    // Page aide
     public function helpAction()
     {
         return $this->render('OCBackBundle:Admin:help.html.twig');

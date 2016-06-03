@@ -68,6 +68,37 @@ class VisitorManager
         $this->flush();
     }
 
+    // Retourne le nombre de visteurs par categorie de prix
+    public function countCategoryPrice()
+    {
+        return $this->getRepository()->countCategoryPrice();
+    }
+
+    // Retourne les 5 nations les plus présentes
+    public function countVisitorsByCountry()
+    {
+        return $this->getRepository()->countVisitorsByCountry();
+    }
+
+    // Retourne un tableau avec le nombres de visites jour/sem/mois/total
+    public function getVisitorCounter()
+    {
+        $countVisitorDay = $this->getRepository()->countDailyVisitors();
+        $countVisitorWeek = $this->getRepository()->countWeeklyVisitors();
+        $countVisitorMonth = $this->getRepository()->countMonthlyVisitors();
+        $countTotalVisitor = $this->getRepository()->countTotalVisitors();
+
+        $count = array(
+            'countDailyVisitor' => $countVisitorDay,
+            'countWeeklyVisitor' => $countVisitorWeek,
+            'countMonthlyVisitor' => $countVisitorMonth,
+            'countTotalVisitor' => $countTotalVisitor,
+        );
+
+        return $count;
+
+    }
+
     private function flush()
     {
         $this->em->flush();

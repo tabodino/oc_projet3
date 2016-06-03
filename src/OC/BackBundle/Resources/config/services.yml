@@ -1,4 +1,4 @@
 services:
-#    oc_back.example:
-#        class: OC\BackBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    oc_back_user.manager:
+        class: OC\BackBundle\EntityManager\UserManager
+        arguments: ["@doctrine.orm.default_entity_manager"]

@@ -21,13 +21,13 @@
                         <div class="table-responsive m-t-20">
                             <table class="table">
                                 <thead class="bg-cyan">
-                                    <tr>
-                                        <th>N°</th>
-                                        <th>Nom utilisateur</th>
-                                        <th>Email</th>
-                                        <th>Dern. connexion</th>
-                                        <th>Action</th>
-                                    </tr>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Nom utilisateur</th>
+                                    <th>Email</th>
+                                    <th>Dern. connexion</th>
+                                    <th>Action</th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 {% for user in users %}
@@ -38,8 +38,7 @@
                                         <td>{{ user.lastLogin|date('d/m/Y') }}</td>
                                         <td>
                                             {% if app.user != user.username%}
-                                                <a href="" class="btn bg-orange"><i class="zmdi zmdi-edit"></i> Modifier</a>
-                                                <a href="{{ path('oc_back_delete_user', { 'username': user.username })}}" class="btn bg-red sa-delete" onclick="return false;"><i class="zmdi zmdi-delete"></i> Supprimer</a>
+                                                <a href="{{ path('oc_back_delete_user', { 'id': user.id })}}" class="btn bg-red sa-delete" onclick="return false;"><i class="zmdi zmdi-delete"></i> Supprimer</a>
                                             {% endif %}
                                         </td>
                                     </tr>

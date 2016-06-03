@@ -15,19 +15,22 @@ oc_back_homepage:
     path:     /admin/
     defaults: { _controller: OCBackBundle:Admin:index }
 
+
+
+# Routing Controller User
 oc_back_profile:
     path:     /admin/profil/
-    defaults: { _controller: OCBackBundle:Admin:profile }
+    defaults: { _controller: OCBackBundle:User:profile }
     methods: [GET, POST]
 
 oc_back_users:
     path:     /admin/utilisateurs/
-    defaults: { _controller: OCBackBundle:Admin:users }
+    defaults: { _controller: OCBackBundle:User:listUsers }
     methods: [GET]
 
 oc_back_delete_user:
-    path:     /admin/utilisateurs/supprime/{username}
-    defaults: { _controller: OCBackBundle:Admin:deleteUser }
+    path:     /admin/utilisateurs/supprime/{id}
+    defaults: { _controller: OCBackBundle:User:deleteUser }
     methods: [GET, POST]
 
 oc_back_pricelist:
@@ -71,6 +74,7 @@ fos_user_registration_register:
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
     prefix: /
+
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
