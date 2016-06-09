@@ -32,7 +32,9 @@
         "endroid/qrcode-bundle": "dev-master",
         "nomaya/social-bundle": "dev-master",
         "phpunit/phpunit": "^5.3",
-        "friendsofsymfony/user-bundle": "dev-master"
+        "friendsofsymfony/user-bundle": "dev-master",
+        "coresphere/console-bundle": "dev-master",
+        "paragonie/random_compat": "1.2.*"
 
     },
     "require-dev": {

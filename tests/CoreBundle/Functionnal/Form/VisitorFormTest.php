@@ -48,7 +48,7 @@ class VisitorFormTest extends WebTestCase
             "visitor[ticket][fullDay]" => 0,
             "visitor[firstname]" => "",
             "visitor[lastname]" => "",
-            "visitor[birthday]" => "2000-01-01",
+            "visitor[birthday]" => "2010-01-01",
             "visitor[country]" => "",
 
         ));

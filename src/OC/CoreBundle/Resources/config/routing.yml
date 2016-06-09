@@ -10,8 +10,8 @@ oc_core_reservation:
     path:     /reservation
     defaults: { _controller: OCCoreBundle:Core:reservation }
 
-oc_core_test:
-    path:     /test/{word}
+oc_core_country:
+    path:     /pays/{word}
     defaults: { _controller: OCCoreBundle:Core:completeCountry }
 
 oc_core_cart_view:

@@ -74,6 +74,16 @@ class Ticket
     }
 
     /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
+
+    /**
      * Get id
      *
      * @return int
@@ -171,34 +181,7 @@ class Ticket
     {
         $this->reduced = $reduced;
     }
-
-    /**
-     * @Assert\IsTrue(message="Le musée est fermé le mardi.")
-     */
-    public function isDateReservationLegal()
-    {
-        $date = $this->dateReservation;
-        $date->format('w');
-        if ($date != 2) {
-            return $this->dateReservation;
-        }
-        return false;
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function isFullDay(ExecutionContextInterface $context)
-    {
-        if ($this->getFullDay() == 0) {
-            $context
-                ->buildViolation('COntenu invlalide')
-                ->atPath('fullDay')
-                ->addViolation()
-            ;
-        }
-    }
-
+    
 
 }
 

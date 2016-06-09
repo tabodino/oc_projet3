@@ -39,8 +39,7 @@ class PriceFormHandler
         return false;
     }
     
-
-
+    
     // Persiste les données si le formulaire est valide
     protected function onSuccess()
     {

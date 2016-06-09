@@ -54,9 +54,9 @@ oc_back_help:
     path: /admin/aide
     defaults: { _controller: OCBackBundle:Admin:help }
 
-
 fos_user_profile_show:
     path: /admin/profil
+
 
 fos_user_change_password:
     path: /admin/profil

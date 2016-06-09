@@ -7,7 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\RangeValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use OC\CoreBundle\Validator\Constraints\MaxEntryByDay;
-
+use OC\CoreBundle\Validator\Constraints\AntiPastDateReservation;
+use OC\CoreBundle\Validator\Constraints\CloseDateReservation;
 /**
  * Visitor
  *
@@ -69,6 +70,8 @@ class Visitor
      *
      * @ORM\OneToOne(targetEntity="OC\CoreBundle\Entity\Ticket", cascade={"persist", "remove"})
      * @MaxEntryByDay()
+     * @AntiPastDateReservation()
+     * @CloseDateReservation()
      */
     protected $ticket;
 
@@ -239,69 +242,12 @@ class Visitor
     {
         $this->customer = $customer;
     }
-
+    
+    
     /**
      * @Assert\Callback
      */
-    public function isPastDateReservation(ExecutionContextInterface $context)
-    {
-        $date = $this->getTicket()->getDateReservation();
-        $pastDate = new \DateTime('+1 days ago');
-
-        if ($date <= $pastDate) {
-            $context
-                ->buildViolation('Date réservation passée')
-                ->atPath('fullDay')
-                ->addViolation()
-            ;
-        }
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function isClosedDateReservation(ExecutionContextInterface $context)
-    {
-        $date = $this->getTicket()->getDateReservation();
-
-        if ($date->format('w') == "2") {
-            $context
-                ->buildViolation('Le musée est fermé le mardi.')
-                ->atPath('fullDay')
-                ->addViolation()
-            ;
-        }
-
-        if ($date->format('w') == "0") {
-            $context
-                ->buildViolation('Aucune réservation n\'est possible le dimanche.')
-                ->atPath('fullDay')
-                ->addViolation()
-            ;
-        }
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function isNonWorkingDay(ExecutionContextInterface $context)
-    {
-        $date = $this->getTicket()->getDateReservation();
-        
-
-        if ($date->format('m-d') == "05-01" || $date->format('m-d') == "11-01" || $date->format('m-d') == "12-25") {
-            $context
-                ->buildViolation('Le musée est fermé les 1er mai, 1er novembre et 25 décembre.')
-                ->atPath('fullDay')
-                ->addViolation()
-            ;
-        }
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function pastFullDayReservation(ExecutionContextInterface $context)
+   /* public function pastFullDayReservation(ExecutionContextInterface $context)
     {
         $today = new \DateTime();
         $day = $today->format('Y-m-d');
@@ -317,7 +263,7 @@ class Visitor
                 ->addViolation()
             ;
         }
-    }
+    }*/
 
 
 

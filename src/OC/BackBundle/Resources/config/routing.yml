@@ -1,4 +1,1 @@
-oc_back_homepage:
-    path:     /admin
-    defaults: { _controller: OCBackBundle:Admin:index }
 
