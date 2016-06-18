@@ -10,36 +10,49 @@ namespace tests\CoreBundle\Unit\EntityManager;
 
 use OC\CoreBundle\Controller\CartController;
 use OC\CoreBundle\Entity\Customer;
+use OC\CoreBundle\EntityManager\CustomerManager;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class CustomerManagerTest extends \PHPUnit_Framework_TestCase
+class CustomerManagerTest extends KernelTestCase
 {
-    public function testCreateCustomer()
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function setUp()
     {
-        $customer = new Customer();
-        $customer->setId(1);
-        $customer->setEmail("email@mail.com");
-        $customer->setCreatedAt(new \DateTime());
+        self::bootKernel();
 
-        $result = new Customer();
-        $result->setId(1);
-        $result->setEmail("email@mail.com");
-        $result->setCreatedAt(new \DateTime());
+        $this->em = static::$kernel->getContainer()
+            ->get('doctrine')
+            ->getManager();
+    }
 
-
+    public function testUserManager()
+    {
         $manager = $this
-            ->getMockBuilder('\OC\CoreBundle\EntityManager\CustomerManager')
-            ->setMethods(array('create'))
+            ->getMockBuilder('\OC\BackBundle\EntityManager\Customer')
             ->disableOriginalConstructor()
+            ->setMethods(array('create'))
             ->getMock()
         ;
 
         $manager->expects($this->any())
             ->method('create')
-            ->with($result)
-            //->will($this->returnValue($repository))
+            ->will($this->returnValue(true))
         ;
 
-        $manager->create($customer);
+        $cm = new CustomerManager($this->em);
+
+        $customer = new Customer();
+        $customer->setEmail('test@mail.com');
+        $cm->create($customer);
+        
 
     }
+   
 }

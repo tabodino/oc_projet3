@@ -16,11 +16,12 @@ class AgeCalculatorTest extends WebTestCase
 {
     public function testGetAgeCalculator()
     {
+        // date avec annee/mois/jours antérieru à date actuelle
         $birthday1 = '2000-01-01';
-
+       
         $birthday2 = '2000-09-11';
 
-        $birthday3 = '2000-06-11';
+        $birthday3 = '2000-06-20';
 
         $ageCalculator = new AgeCalculator();
 

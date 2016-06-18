@@ -39,6 +39,85 @@ class AdminControllerTest extends WebTestCase
         $this->assertEquals(200, $responseCode);
     }
 
+    public function testAdminProfilPageAfterLoginIsStatus200()
+    {
+
+        $crawler = $this->client->request('GET', '/admin/profil/');
+
+        $responseCode = $this->client->getResponse()->getStatusCode();
+
+        $this->assertEquals(1, $crawler->filter('h2:contains("Profil")')->count());
+
+        $this->assertEquals(200, $responseCode);
+    }
+
+    public function testAdminPricelistPageAfterLoginIsStatus200()
+    {
+        $crawler = $this->client->request('GET', '/admin/tarifs');
+
+        $responseCode = $this->client->getResponse()->getStatusCode();
+
+        $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("LISTE DES TARIFS")')->count());
+
+        $this->assertEquals(200, $responseCode);
+    }
+
+    public function testAdminUsersPageAfterLoginIsStatus200()
+    {
+        $crawler = $this->client->request('GET', '/admin/utilisateurs/');
+
+        $responseCode = $this->client->getResponse()->getStatusCode();
+
+        $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("Liste des utilisateurs")')->count());
+
+        $this->assertEquals(200, $responseCode);
+    }
+
+    public function testAdminStatsPageAfterLoginIsStatus200()
+    {
+        $crawler = $this->client->request('GET', '/admin/statistiques');
+
+        $responseCode = $this->client->getResponse()->getStatusCode();
+
+        $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("Statistiques")')->count());
+
+        $this->assertEquals(200, $responseCode);
+    }
+
+    public function testAdminCalendarPageAfterLoginIsStatus200()
+    {
+        $crawler = $this->client->request('GET', '/admin/calendrier');
+
+        $responseCode = $this->client->getResponse()->getStatusCode();
+
+        $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("Calendrier")')->count());
+
+        $this->assertEquals(200, $responseCode);
+    }
+
+    public function testAdminHelpPageAfterLoginIsStatus200()
+    {
+        $crawler = $this->client->request('GET', '/admin/aide');
+
+        $responseCode = $this->client->getResponse()->getStatusCode();
+
+        $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("Aide")')->count());
+
+        $this->assertEquals(200, $responseCode);
+    }
+
+    public function testAdminAddUserPageAfterLoginIsStatus200()
+    {
+        $crawler = $this->client->request('GET', '/admin/utilisateur/ajout');
+
+        $responseCode = $this->client->getResponse()->getStatusCode();
+
+        $this->assertGreaterThanOrEqual(1, $crawler->filter('html:contains("Ajouter un utilisateur")')->count());
+
+        $this->assertEquals(200, $responseCode);
+    }
+    
+
     /**
      * @return Client
      */
